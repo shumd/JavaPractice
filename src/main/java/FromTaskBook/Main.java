@@ -1,7 +1,8 @@
 package FromTaskBook;
 
-import java.util.ArrayList;
-import java.util.List;
+import FromTaskBook.Properties.ColorProperty;
+import FromTaskBook.Properties.Date;
+import FromTaskBook.Properties.DateOfCreationProperty;
 
 public class Main {
     public static void main(String[] args) {
@@ -936,7 +937,8 @@ public class Main {
         // Property + generic method Points (Point, Point 3d, PointWithProperty)
 
         ColorProperty colorProperty = new ColorProperty("red");
-        PointInh pointInh = new PointInh(1,colorProperty);
+        DateOfCreationProperty dateOfCreationProperty = new DateOfCreationProperty(1,75);
+        PointInh pointInh = new PointInh(1,colorProperty,dateOfCreationProperty);
         System.out.println(pointInh);
 }
 }
