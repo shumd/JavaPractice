@@ -938,6 +938,5 @@ public class Main {
         ColorProperty colorProperty = new ColorProperty("red");
         PointInh pointInh = new PointInh(1,colorProperty);
         System.out.println(pointInh);
-//
 }
 }
