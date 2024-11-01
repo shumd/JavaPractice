@@ -1,18 +1,15 @@
 package FromTaskBook;
 
-import lombok.AllArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import FromTaskBook.Properties.CoordinatesProperty;
+import FromTaskBook.Properties.Property;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@ToString
 public class PointInh {
     int x;
-    @Setter
-    private List<Property> properties;
+    private final List<Property> properties;
 
     public PointInh(int x, Property... properties){
         this.properties = new ArrayList<>(Arrays.asList(properties));
@@ -28,9 +25,22 @@ public class PointInh {
 
     @Override
     public String toString(){
-        StringBuilder stringBuilder = new StringBuilder();
+        StringBuilder stringBuilder = new StringBuilder("Точка {" + x);
+
+        for(Property property : properties){
+            if(property.getName().equals("Coordinates")){
+                CoordinatesProperty coordinatesProperty = (CoordinatesProperty) property;
+                for(Integer i : coordinatesProperty.getValue()){
+                    stringBuilder.append(";").append(i);
+                }
+                break;
+            }
+        }
+        stringBuilder.append("} ");
 
         for(Property property: properties){
+            if(property.getName().equals("Coordinates")){continue;}
+
             stringBuilder.append(property.toString()).append(", ");
         }
         stringBuilder.delete(stringBuilder.length()-2,stringBuilder.length());
