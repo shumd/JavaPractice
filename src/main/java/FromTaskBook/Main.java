@@ -1,5 +1,6 @@
 package FromTaskBook;
 
+import FromTaskBook.interfaces.AreaCounter;
 import FromTaskBook.interfaces.BirdShop;
 import FromTaskBook.interfaces.Summator;
 
@@ -953,12 +954,24 @@ public class Main {
 //        System.out.println(rectangle);
 //        square.setBottomRightCorner(new Point(3,2));
 //        System.out.println(square);
+
+        //3.3.1 Сложение
         Summator summator = new Summator();
         System.out.println(summator.sum(2,new Fraction(3,5),2.3));
 
+        //3.3.2 Птичий рынок
         BirdShop.singAll(new Sparrow(),
                 new Sparrow(),
                 new Cuckoo(),
                 new Parrot("Parrot sing a song"));
-}
+
+        //3.3.3 Общая площадь
+        System.out.println(AreaCounter.countArea(new Circle(new Point(1,2),5),
+                new Rectangle(0,0,2,5),
+                new Triangle(new Point(1,2),
+                        new Point(3,5),
+                        new Point(10,0)),
+                new SquareInheritance(1,1,5)));
+
+    }
 }
