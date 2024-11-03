@@ -1,4 +1,4 @@
-package FromTaskBook.interfaces;
+package FromTaskBook.interfacesTask;
 
 import FromTaskBook.Bird;
 
