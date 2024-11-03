@@ -1,7 +1,6 @@
 package FromTaskBook;
 
 
-
 public class Rectangle extends Figure {
     private Point topLeftCorner = mainPoint;
     private Point bottomRightCorner;
