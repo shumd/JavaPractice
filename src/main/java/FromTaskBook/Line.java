@@ -1,6 +1,8 @@
 package FromTaskBook;
 
-public class Line {
+import FromTaskBook.interfacesTask.Lengthable;
+
+public class Line implements Lengthable {
     private Point start;
     private Point end;
 
@@ -35,8 +37,8 @@ public class Line {
         return end;
     }
 
-
-    public int lenght(){
+    @Override
+    public int length(){
         return (int)Math.sqrt(Math.pow(end.x - start.x,2) + Math.pow(end.y - start.y,2));
     }
 

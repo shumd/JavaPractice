@@ -1,5 +1,11 @@
 package FromTaskBook;
 
+import FromTaskBook.interfacesTask.CatShop;
+import FromTaskBook.interfacesTask.LengthSummator;
+import FromTaskBook.interfacesTask.Tiger;
+
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
         //НА МЕТОДАХ
@@ -970,6 +976,18 @@ public class Main {
 //                new SquareInheritance(1,1,5)));
 
         //3.3.4 Мяуканье
+        CatShop.meowAll(new Cat("Petr"),
+                new Cat("Barzik"),
+                new Tiger());
+
+        //3.3.5 Измерение длины
+        List<Point> points = List.of(new Point(0,2),
+                new Point(2,5),
+                new Point(6,10));
+        System.out.println(LengthSummator.sum(new Line(0,1,2,4),
+                new Polyline(points),
+                new ClosedPolyline(points)));
+
 
     }
 }

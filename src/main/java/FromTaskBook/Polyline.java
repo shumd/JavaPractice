@@ -1,8 +1,10 @@
 package FromTaskBook;
 
+import FromTaskBook.interfacesTask.Lengthable;
+
 import java.util.*;
 
-public class Polyline {
+public class Polyline implements Lengthable {
     private List<Point> points;
 
     public Polyline(Point... args){
@@ -29,11 +31,12 @@ public class Polyline {
         add(new ArrayList<>(Arrays.asList(points)));
     }
 
+    @Override
     public int length(){
         int res = 0;
         for (int i = 1; i < points.size(); i++){
             Line l = new Line(points.get(i-1),points.get(i));
-            res += l.lenght();
+            res += l.length();
         }
 
         return res;

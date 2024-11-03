@@ -1,10 +1,12 @@
 package FromTaskBook;
 
+import FromTaskBook.interfacesTask.Lengthable;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ClosedPolyline extends Polyline {
+public class ClosedPolyline extends Polyline implements Lengthable {
     public ClosedPolyline(Point... args){
         this(new ArrayList<>(Arrays.asList(args)));
     }
@@ -26,6 +28,6 @@ public class ClosedPolyline extends Polyline {
         return super.length() +
                 new Line(points.getLast().x, points.getLast().y,
                         points.getFirst().x, points.getFirst().y).
-                        lenght();
+                        length();
     }
 }

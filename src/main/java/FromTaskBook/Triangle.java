@@ -15,9 +15,9 @@ public class Triangle extends Figure{
         bc = new Line(this.b, this.c);
         ac = new Line(mainPoint, this.c);
 
-        if(ab.lenght() > ac.lenght()+bc.lenght()||
-        bc.lenght() > ab.lenght()+ac.lenght()||
-        ac.lenght() > bc.lenght()+ab.lenght()){
+        if(ab.length() > ac.length()+bc.length()||
+        bc.length() > ab.length()+ac.length()||
+        ac.length() > bc.length()+ab.length()){
             throw new IllegalArgumentException("Такой треугольник не может существовать");
         }
     }
@@ -35,9 +35,9 @@ public class Triangle extends Figure{
     @Override
     public double area() {
         return Math.sqrt(p()*
-                (p()-ab.lenght())*
-                (p()- bc.lenght())*
-                (p()- ac.lenght()));
+                (p()-ab.length())*
+                (p()- bc.length())*
+                (p()- ac.length()));
     }
 
     @Override
