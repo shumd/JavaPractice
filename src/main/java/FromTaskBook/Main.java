@@ -937,13 +937,23 @@ public class Main {
         //Квадрат и прямоугольник через поинты
         // Property + generic method Points (Point, Point 3d, PointWithProperty)
 
-        ColorProperty colorProperty = new ColorProperty("red");
-        String i = colorProperty.getValue();
-        DateOfCreationProperty dateOfCreationProperty = new DateOfCreationProperty(1,75);
-        PointInh pointInh = new PointInh(1,
-                colorProperty,
-                dateOfCreationProperty,
-                new CoordinatesProperty(List.of(1,2)));
-        System.out.println(pointInh);
+//        ColorProperty colorProperty = new ColorProperty("red");
+//        String i = colorProperty.getValue();
+//        DateOfCreationProperty dateOfCreationProperty = new DateOfCreationProperty(1,75);
+//        PointInh pointInh = new PointInh(1,
+//                colorProperty,
+//                dateOfCreationProperty,
+//                new CoordinatesProperty(2,3));
+//        System.out.println(pointInh);
+
+//        Rectangle rectangle = new Rectangle(0,0,2,5);
+//        SquareInheritance square = new SquareInheritance(0,0,2);
+//        System.out.println(rectangle);
+//        System.out.println(square);
+
+//        rectangle.setBottomRightCorner(new Point(-1,2));
+//        System.out.println(rectangle);
+//        square.setBottomRightCorner(new Point(3,2));
+//        System.out.println(square);
 }
 }

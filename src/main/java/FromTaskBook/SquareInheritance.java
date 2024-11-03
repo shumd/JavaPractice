@@ -1,37 +1,23 @@
 package FromTaskBook;
 
 
-public class SquareInheritance {
-    private final Rectangle rectangle;
-
+public class SquareInheritance extends Rectangle {
     public SquareInheritance(Point leftCorner, int sideSize) {
-        rectangle = new Rectangle(leftCorner, sideSize, sideSize);
+        super(leftCorner,sideSize,sideSize);
     }
 
     public SquareInheritance(int x, int y, int sideSize){
         this(new Point(x,y), sideSize);
     }
 
-    public int getSideSize() {
-        return rectangle.getHeight();
-    }
-
-    public void setSideSize(int sideSize) {
-        rectangle.setHeight(sideSize);
-        rectangle.setWidth(sideSize);
-    }
-
-    public Polyline getPolyline() {
-        return rectangle.getPolyline();
-    }
-
-    public double area(){
-        return rectangle.area();
+    @Override
+    protected boolean isIncorrect() {
+        return width()!=height();
     }
 
     @Override
     public String toString() {
-        return "Квадрат в точке " + rectangle.mainPoint +
-                " со стороной " + rectangle.getHeight();
+        return "Квадрат в точке " + mainPoint +
+                " со стороной " + width();
     }
 }

@@ -1,56 +1,61 @@
 package FromTaskBook;
 
-public class Rectangle extends Figure {
-    private int height;
-    private int width;
 
-    public Rectangle(Point leftCorner, int height, int width) {
-        super(leftCorner);
-        setHeight(height);
-        setWidth(width);
+
+public class Rectangle extends Figure {
+    private Point topLeftCorner = mainPoint;
+    private Point bottomRightCorner;
+
+    public Rectangle(Point topLeftCorner, Point bottomRightCorner) {
+        super(topLeftCorner);
+        this.bottomRightCorner = bottomRightCorner;
+    }
+
+    public Rectangle(Point topLeftCorner, int height, int width) {
+        this(topLeftCorner, new Point(topLeftCorner.x+width, topLeftCorner.y-height));
     }
 
     public Rectangle(int x, int y, int height, int width) {
         this(new Point(x,y), height, width);
     }
 
-    public int getHeight() {
-        return height;
+    public void setTopLeftCorner(Point topLeftCorner) {
+        this.topLeftCorner = topLeftCorner;
+        if(isIncorrect()) throw new IllegalArgumentException("topLeftCorner is wrong");
+    }
+    public void setBottomRightCorner(Point bottomRightCorner) {
+        this.bottomRightCorner = bottomRightCorner;
+        if(isIncorrect()) throw new IllegalArgumentException("bottomRightCorner is wrong");
     }
 
-    public void setHeight(int height) {
-        if(height <= 0){
-            throw new IllegalArgumentException("Side must be > 0" );
-        }
-
-        this.height = height;
+    public Point getTopLeftCorner() {
+        return new Point(topLeftCorner);
+    }
+    public Point getBottomRightCorner() {
+        return new Point(bottomRightCorner);
     }
 
-    public void setWidth(int width) {
-        if(width <= 0){
-            throw new IllegalArgumentException("Side must be > 0");
-        }
 
-        this.width = width;
+    protected boolean isIncorrect(){
+        return width()<1 || height()<1;
     }
 
-    public Polyline getPolyline(){
-        return new Polyline(mainPoint,
-                new Point(mainPoint.x + width, mainPoint.y),
-                new Point(mainPoint.x + width, mainPoint.y - height),
-                new Point(mainPoint.x, mainPoint.y - height),
-                mainPoint);
+    protected int width(){
+        return bottomRightCorner.x-topLeftCorner.x;
+    }
+    protected int height(){
+        return topLeftCorner.y-bottomRightCorner.y;
     }
 
     @Override
     public double area() {
-        return width * height;
+        return width()*height();
     }
 
     @Override
     public String toString() {
         return "Прямоугольник в точке " + mainPoint +
-                " с высотой " + height +
-                " и шириной " + width;
+                " с высотой " + height() +
+                " и шириной " + width();
     }
 }

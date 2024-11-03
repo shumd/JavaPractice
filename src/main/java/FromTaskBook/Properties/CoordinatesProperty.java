@@ -9,6 +9,10 @@ public class CoordinatesProperty extends Property {
         super("Coordinates", coordinates);
     }
 
+    public CoordinatesProperty(Integer... coordinates) {
+        this(List.of(coordinates));
+    }
+
     @Override
     public List<Integer> getValue() {
         return new ArrayList<>((List<Integer>) value);
