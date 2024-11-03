@@ -1,8 +1,11 @@
 package FromTaskBook;
 
 import FromTaskBook.interfacesTask.Lengthable;
+import FromTaskBook.interfacesTask.Polylineable;
+import lombok.Getter;
 
-public class Line implements Lengthable {
+@Getter
+public class Line implements Lengthable, Polylineable {
     private Point start;
     private Point end;
 
@@ -23,9 +26,6 @@ public class Line implements Lengthable {
     public void setStart(int x, int y){
         setStart(new Point(x,y));
     }
-    public Point getStart() {
-        return start;
-    }
 
     public void setEnd(Point point){
         end = new Point(point);
@@ -33,13 +33,15 @@ public class Line implements Lengthable {
     public void setEnd(int x, int y){
         setEnd(new Point(x,y));
     }
-    public Point getEnd() {
-        return end;
-    }
 
     @Override
     public int length(){
         return (int)Math.sqrt(Math.pow(end.x - start.x,2) + Math.pow(end.y - start.y,2));
+    }
+
+    @Override
+    public Polyline polyline() {
+        return new Polyline(start, end);
     }
 
     @Override

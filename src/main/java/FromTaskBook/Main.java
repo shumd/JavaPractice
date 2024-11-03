@@ -2,6 +2,7 @@ package FromTaskBook;
 
 import FromTaskBook.interfacesTask.CatShop;
 import FromTaskBook.interfacesTask.LengthSummator;
+import FromTaskBook.interfacesTask.PolylineBuilder;
 import FromTaskBook.interfacesTask.Tiger;
 
 import java.util.List;
@@ -988,6 +989,17 @@ public class Main {
                 new Polyline(points),
                 new ClosedPolyline(points)));
 
+        //3.3.6 Замкнутый квадрат
+        Rectangle rectangle = new Rectangle(0,0,3,5);
+        ClosedPolyline closedPolyline = (ClosedPolyline) rectangle.polyline();
+        System.out.println(closedPolyline);
+        Polyline polyline = rectangle.polyline();
+        System.out.println(polyline);
+        System.out.println(polyline.length());
+        System.out.println(closedPolyline.length());
 
+        //3.3.7 Ломай меня полностью
+        System.out.println(PolylineBuilder.buildPolyline(new SquareInheritance(1,2,5),
+                rectangle));
     }
 }

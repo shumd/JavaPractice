@@ -1,7 +1,10 @@
 package FromTaskBook;
 
 
-public class SquareInheritance extends Rectangle {
+import FromTaskBook.interfacesTask.Polylineable;
+
+
+public class SquareInheritance extends Rectangle implements Polylineable {
     public SquareInheritance(Point leftCorner, int sideSize) {
         super(leftCorner,sideSize,sideSize);
     }

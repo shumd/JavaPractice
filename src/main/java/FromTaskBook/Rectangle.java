@@ -1,7 +1,9 @@
 package FromTaskBook;
 
 
-public class Rectangle extends Figure {
+import FromTaskBook.interfacesTask.Polylineable;
+
+public class Rectangle extends Figure implements Polylineable {
     private Point topLeftCorner = mainPoint;
     private Point bottomRightCorner;
 
@@ -34,6 +36,13 @@ public class Rectangle extends Figure {
         return new Point(bottomRightCorner);
     }
 
+    public Polyline polyline() {
+        return new ClosedPolyline(topLeftCorner,
+                new Point(bottomRightCorner.x,topLeftCorner.y),
+                bottomRightCorner,
+                new Point(topLeftCorner.x,bottomRightCorner.y),
+                topLeftCorner);
+    }
 
     protected boolean isIncorrect(){
         return width()<1 || height()<1;

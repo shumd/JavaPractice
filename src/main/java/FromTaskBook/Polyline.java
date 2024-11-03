@@ -1,10 +1,11 @@
 package FromTaskBook;
 
 import FromTaskBook.interfacesTask.Lengthable;
+import FromTaskBook.interfacesTask.Polylineable;
 
 import java.util.*;
 
-public class Polyline implements Lengthable {
+public class Polyline implements Lengthable, Polylineable {
     private List<Point> points;
 
     public Polyline(Point... args){
@@ -40,6 +41,11 @@ public class Polyline implements Lengthable {
         }
 
         return res;
+    }
+
+    @Override
+    public Polyline polyline() {
+        return this;
     }
 
     @Override

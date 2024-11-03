@@ -1,6 +1,8 @@
 package FromTaskBook;
 
-public class Triangle extends Figure{
+import FromTaskBook.interfacesTask.Polylineable;
+
+public class Triangle extends Figure implements Polylineable {
     private Point b;
     private Point c;
     private final Line ab;
@@ -22,13 +24,13 @@ public class Triangle extends Figure{
         }
     }
 
-    public Polyline getPolyline() {
+    public Polyline polyline() {
         return new Polyline(mainPoint,b,c,mainPoint);
     }
 
     // полупериметр
     private double p(){
-        return (double) getPolyline().length()/2;
+        return (double) polyline().length()/2;
     }
 
     // формула Герона
