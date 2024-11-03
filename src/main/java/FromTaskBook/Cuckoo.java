@@ -16,7 +16,6 @@ public class Cuckoo extends Bird{
     public void sing() {
         int counter = 0;
         int amount = random(MIN, MAX);
-        System.out.println(amount);
         for(int i = 0; i < amount; i++) {
             super.sing();
         }

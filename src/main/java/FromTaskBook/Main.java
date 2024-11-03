@@ -1,9 +1,7 @@
 package FromTaskBook;
 
-import FromTaskBook.Properties.*;
-
-import java.util.ArrayList;
-import java.util.List;
+import FromTaskBook.interfaces.BirdShop;
+import FromTaskBook.interfaces.Summator;
 
 public class Main {
     public static void main(String[] args) {
@@ -955,5 +953,12 @@ public class Main {
 //        System.out.println(rectangle);
 //        square.setBottomRightCorner(new Point(3,2));
 //        System.out.println(square);
+        Summator summator = new Summator();
+        System.out.println(summator.sum(2,new Fraction(3,5),2.3));
+
+        BirdShop.singAll(new Sparrow(),
+                new Sparrow(),
+                new Cuckoo(),
+                new Parrot("Parrot sing a song"));
 }
 }
