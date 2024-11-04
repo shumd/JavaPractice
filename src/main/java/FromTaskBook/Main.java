@@ -1,10 +1,8 @@
 package FromTaskBook;
 
-import FromTaskBook.interfacesTask.CatShop;
-import FromTaskBook.interfacesTask.LengthSummator;
-import FromTaskBook.interfacesTask.PolylineBuilder;
-import FromTaskBook.interfacesTask.Tiger;
+import FromTaskBook.interfacesTask.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
@@ -976,30 +974,60 @@ public class Main {
 //                        new Point(10,0)),
 //                new SquareInheritance(1,1,5)));
 
-        //3.3.4 Мяуканье
-        CatShop.meowAll(new Cat("Petr"),
-                new Cat("Barzik"),
-                new Tiger());
+//        //3.3.4 Мяуканье
+//        CatShop.meowAll(new Cat("Petr"),
+//                new Cat("Barzik"),
+//                new Tiger());
+//
+//        //3.3.5 Измерение длины
+//        List<Point> points = List.of(new Point(0,2),
+//                new Point(2,5),
+//                new Point(6,10));
+//        System.out.println(LengthSummator.sum(new Line(0,1,2,4),
+//                new Polyline(points),
+//                new ClosedPolyline(points)));
+//
+//        //3.3.6 Замкнутый квадрат
+//        Rectangle rectangle = new Rectangle(0,0,3,5);
+//        ClosedPolyline closedPolyline = (ClosedPolyline) rectangle.polyline();
+//        System.out.println(closedPolyline);
+//        Polyline polyline = rectangle.polyline();
+//        System.out.println(polyline);
+//        System.out.println(polyline.length());
+//        System.out.println(closedPolyline.length());
+//
+//        //3.3.7 Ломай меня полностью
+//        System.out.println(PolylineBuilder.buildPolyline(new SquareInheritance(1,2,5),
+//                rectangle));
 
-        //3.3.5 Измерение длины
-        List<Point> points = List.of(new Point(0,2),
-                new Point(2,5),
-                new Point(6,10));
-        System.out.println(LengthSummator.sum(new Line(0,1,2,4),
-                new Polyline(points),
-                new ClosedPolyline(points)));
+        // 3.3.8 Лучший стрелок
+//        Shooter shooter = new Shooter("Vadik");
+//        shooter.setWeapon(new PistolInheritance(4));
+//        shooter.shoot();
+//        shooter.setWeapon(new Rifle());
+//        shooter.shoot();
 
-        //3.3.6 Замкнутый квадрат
-        Rectangle rectangle = new Rectangle(0,0,3,5);
-        ClosedPolyline closedPolyline = (ClosedPolyline) rectangle.polyline();
-        System.out.println(closedPolyline);
-        Polyline polyline = rectangle.polyline();
-        System.out.println(polyline);
-        System.out.println(polyline.length());
-        System.out.println(closedPolyline.length());
-
-        //3.3.7 Ломай меня полностью
-        System.out.println(PolylineBuilder.buildPolyline(new SquareInheritance(1,2,5),
-                rectangle));
+        // 3.3.9 Городим
+//        DoubleWayCity a = new DoubleWayCity("A");
+//        City b = new City("B");
+//        DoubleWayCity c = new DoubleWayCity("C");
+//        DoubleWayCity d = new DoubleWayCity("D");
+//        City e = new City("E");
+//
+//        a.addWay(new Way(b,0));
+//        a.addWay(new Way(c,0));
+//
+//        b.addWay(new Way(c,0));
+//
+//        d.addWay(new Way(b,0));
+//        d.addWay(new Way(e,0));
+//
+//        e.addWay(new Way(c,0));
+//
+//        List<City> cities = List.of(a,b,c,d,e);
+//
+//        for(City city : cities) {
+//            System.out.println(city);
+//        }
     }
 }
