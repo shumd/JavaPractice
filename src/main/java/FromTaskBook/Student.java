@@ -1,5 +1,6 @@
 package FromTaskBook;
 
+import FromTaskBook.exceptions.IllegalMarkException;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -41,8 +42,7 @@ public class Student {
     public void addMarks(Integer... marks){
         for (Integer i : marks){
             if(i < MIN_MARK || i > MAX_MARK){
-                throw new IllegalArgumentException("Mark must be more than " + (MIN_MARK-1)
-                + " and less than " + (MAX_MARK+1));
+                throw new IllegalMarkException(i);
             }
             this.marks.add(i);
         }

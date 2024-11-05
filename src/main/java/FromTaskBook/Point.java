@@ -1,6 +1,11 @@
 package FromTaskBook;
 
-public class Point {
+import lombok.EqualsAndHashCode;
+
+import java.util.Comparator;
+
+@EqualsAndHashCode
+public class Point implements Comparable<Point>{
     int x;
     int y;
 
@@ -16,5 +21,13 @@ public class Point {
     @Override
     public String toString() {
         return ("{" + x + ";" + y + "}");
+    }
+
+    @Override
+    public int compareTo(Point point) {
+        if(x == point.x){
+            return y-point.y;
+        }
+        return x-point.x;
     }
 }

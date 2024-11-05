@@ -1,7 +1,10 @@
 package FromTaskBook;
 
 import FromTaskBook.interfacesTask.*;
+import IDE_ClassWork.BankAccount;
+import IDE_ClassWork.ConnectionLostException;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -1007,7 +1010,7 @@ public class Main {
 //        shooter.setWeapon(new Rifle());
 //        shooter.shoot();
 
-        // 3.3.9 Городим
+//         //3.3.9 Городим
 //        DoubleWayCity a = new DoubleWayCity("A");
 //        City b = new City("B");
 //        DoubleWayCity c = new DoubleWayCity("C");
@@ -1029,5 +1032,17 @@ public class Main {
 //        for(City city : cities) {
 //            System.out.println(city);
 //        }
+
+        // сортировка по x потом по y
+//        List<Point> points1 = new ArrayList(List.of(new Point(-10,2),
+//                new Point (4,5),
+//                new Point(-10,4)));
+//        System.out.println(points1);
+//        points1.sort(null);
+//        System.out.println(points1);
+
+//        Student student = new Student("Koe",3,5,24,5);
+
+
     }
 }

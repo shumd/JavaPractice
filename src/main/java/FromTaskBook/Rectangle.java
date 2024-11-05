@@ -40,8 +40,7 @@ public class Rectangle extends Figure implements Polylineable {
         return new ClosedPolyline(topLeftCorner,
                 new Point(bottomRightCorner.x,topLeftCorner.y),
                 bottomRightCorner,
-                new Point(topLeftCorner.x,bottomRightCorner.y),
-                topLeftCorner);
+                new Point(topLeftCorner.x,bottomRightCorner.y));
     }
 
     protected boolean isIncorrect(){
