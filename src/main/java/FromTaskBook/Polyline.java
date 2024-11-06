@@ -2,11 +2,13 @@ package FromTaskBook;
 
 import FromTaskBook.interfacesTask.Lengthable;
 import FromTaskBook.interfacesTask.Polylineable;
+import lombok.EqualsAndHashCode;
 
 import java.util.*;
 
+@EqualsAndHashCode(callSuper = false)
 public class Polyline implements Lengthable, Polylineable {
-    private List<Point> points;
+    private final List<Point> points;
 
     public Polyline(Point... args){
         this(new ArrayList<>(Arrays.asList(args)));

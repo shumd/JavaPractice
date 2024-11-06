@@ -1043,6 +1043,64 @@ public class Main {
 
 //        Student student = new Student("Koe",3,5,24,5);
 
+        // BankAccount
+//        BankAccount from = new BankAccount();
+//        from.money = 1000;
+//        BankAccount to = new BankAccount();
+//
+//        System.out.println(from.money);
+//        System.out.println(to.money);
+//
+//        from.transferMoney(100,to);
+//
+//        System.out.println(from.money);
+//        System.out.println(to.money);
 
+//        // 3.4.1 Сравнение дробей
+//        Fraction fraction = new Fraction(3,5);
+//        Fraction fraction2 = new Fraction(3,5);
+//        System.out.println(fraction.equals(fraction2));
+//        System.out.println(fraction.hashCode() == fraction2.hashCode());
+//
+//        // 3.4.2 Сравнение точек
+//        Point point = new Point(1,2);
+//        Point point2 = new Point(1,2);
+//        System.out.println(point.equals(point2));
+//        System.out.println(point.hashCode() == point2.hashCode());
+//
+//        // 3.4.3 Сравнение линий
+//        Line line = new Line(point,point2);
+//        Line line2 = new Line(point2,point);
+//        System.out.println(line.equals(line2));
+//        System.out.println(line.hashCode() == line2.hashCode());
+//
+//        // 3.4.4 Сравнение ломаных линий
+//        Polyline polyline = new Polyline(point,point2);
+//        Polyline polyline2 = new Polyline(point2,point);
+//        System.out.println(polyline.equals(polyline2));
+//        System.out.println(polyline.hashCode() == polyline2.hashCode());
+
+        // 3.4.5 Сравнение городов
+//        City saratov = new City("Saratov");
+//        City gorny = new City("Gorny");
+//        DoubleWayCity engels = new DoubleWayCity("Engels");
+//        City balakovo = new City("Balakovo");
+//
+//        engels.addWay(new Way(balakovo,5));
+//        System.out.println(engels);
+//
+//        saratov.addWay(new Way(balakovo,5));
+//        saratov.addWay(new Way(engels,5));
+//        System.out.println(saratov);
+//
+//        gorny.addWay(new Way(balakovo,5));
+//        System.out.println(gorny);
+//
+//        System.out.println(balakovo);
+//
+//        System.out.println(engels.equals(gorny));
+//        System.out.println(engels.getWays());
+//        System.out.println(gorny.getWays());
+//        System.out.println(engels.getWays().equals(gorny.getWays()));
     }
 }

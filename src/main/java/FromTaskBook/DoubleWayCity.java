@@ -1,5 +1,8 @@
 package FromTaskBook;
 
+import lombok.EqualsAndHashCode;
+
+//@EqualsAndHashCode(callSuper = true) ВЫДАЕТ FALSE
 public class DoubleWayCity extends City{
     public DoubleWayCity(String name, Way... ways){
         super(name, ways);
@@ -14,6 +17,18 @@ public class DoubleWayCity extends City{
         }
         super.addWay(way);
         way.getCityTo().addWay(new Way(this, way.getPrice()));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof City)) return false;
+        return super.equals(o);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 }
 

@@ -1,22 +1,23 @@
 package FromTaskBook;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@EqualsAndHashCode(exclude = {"name"})
 public class City {
-    private String name;
-    private List<Way> ways = new ArrayList<>();
+    @Getter
+    private final String name;
+    private final List<Way> ways = new ArrayList<>();
 
     public City(String name, Way... ways){
         this.name = name;
         for (Way w : ways) {
             addWay(w);
         }
-    }
-
-    public String getName() {
-        return name;
     }
 
     public List<Way> getWays() {
@@ -47,5 +48,4 @@ public class City {
     public String toString() {
         return name + ": " + ways;
     }
-
 }

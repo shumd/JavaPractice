@@ -2,9 +2,8 @@ package FromTaskBook;
 
 import lombok.EqualsAndHashCode;
 
-import java.util.Comparator;
 
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper=false)
 public class Point implements Comparable<Point>{
     int x;
     int y;

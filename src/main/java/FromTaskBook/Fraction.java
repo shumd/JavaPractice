@@ -1,5 +1,9 @@
 package FromTaskBook;
 
+import lombok.EqualsAndHashCode;
+
+
+@EqualsAndHashCode(callSuper = false)
 public final class Fraction extends Number{
     private final int numerator;
     private final int denominator;

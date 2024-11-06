@@ -2,9 +2,11 @@ package FromTaskBook;
 
 import FromTaskBook.interfacesTask.Lengthable;
 import FromTaskBook.interfacesTask.Polylineable;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper=false)
 public class Line implements Lengthable, Polylineable {
     private Point start;
     private Point end;

@@ -12,9 +12,15 @@ public class BankAccount {
         }
     }
 
-    public void transferMoney(int amount, BankAccount to) throws ConnectionLostException{
+    public void transferMoney(int amount, BankAccount to) {
         money -= amount;
         to.money += amount;
-        updateDatabase();
+        try {
+            updateDatabase();
+        }catch(ConnectionLostException e){
+            money += amount;
+            to.money -= amount;
+            throw new RuntimeException("ConnectionLostException");
+        }
     }
 }
