@@ -2,7 +2,7 @@ package FromTaskBook;
 
 import lombok.EqualsAndHashCode;
 
-//@EqualsAndHashCode(callSuper = true) ВЫДАЕТ FALSE
+//@EqualsAndHashCode(callSuper = true) FALSE ВЫВОДИТ
 public class DoubleWayCity extends City{
     public DoubleWayCity(String name, Way... ways){
         super(name, ways);

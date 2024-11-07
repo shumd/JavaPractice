@@ -2,6 +2,15 @@ package calculator;
 
 import java.util.List;
 
-public abstract class Input implements Operation {
-    private List<Valueable> values;
+public class Input<T> implements Readable<T>{
+    private final List<T> inputList;
+
+    public Input(Readable<T> readable) {
+        this.inputList = readable.read();
+    }
+
+    @Override
+    public List<T> read(){
+        return List.copyOf(inputList);
+    }
 }
