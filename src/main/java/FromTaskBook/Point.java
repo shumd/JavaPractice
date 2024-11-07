@@ -3,7 +3,7 @@ package FromTaskBook;
 import lombok.EqualsAndHashCode;
 
 
-@EqualsAndHashCode(callSuper=false)
+@EqualsAndHashCode()
 public class Point implements Comparable<Point>{
     int x;
     int y;

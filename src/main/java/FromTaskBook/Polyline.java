@@ -6,7 +6,7 @@ import lombok.EqualsAndHashCode;
 
 import java.util.*;
 
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode()
 public class Polyline implements Lengthable, Polylineable {
     private final List<Point> points;
 

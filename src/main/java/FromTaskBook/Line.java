@@ -6,14 +6,14 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
-@EqualsAndHashCode(callSuper=false)
+@EqualsAndHashCode()
 public class Line implements Lengthable, Polylineable {
     private Point start;
     private Point end;
 
     public Line(int x1, int y1, int x2, int y2){
-       this(new Point(x1,y1),
-               new Point(x2,y2));
+        this(new Point(x1,y1),
+                new Point(x2,y2));
     }
 
     public Line(Point start, Point end){
@@ -51,3 +51,7 @@ public class Line implements Lengthable, Polylineable {
         return "Линия от " + start + " до " + end;
     }
 }
+
+
+
+

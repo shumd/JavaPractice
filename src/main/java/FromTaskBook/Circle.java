@@ -1,5 +1,8 @@
 package FromTaskBook;
 
+import lombok.Getter;
+
+@Getter
 public class Circle extends Figure {
     private final double radius;
 
@@ -10,10 +13,6 @@ public class Circle extends Figure {
             throw new IllegalArgumentException("Radius must be a positive number");
         }
         this.radius = radius;
-    }
-
-    public double getRadius() {
-        return radius;
     }
 
     public Point center(){

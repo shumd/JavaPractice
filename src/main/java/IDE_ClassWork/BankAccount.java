@@ -1,7 +1,10 @@
 package IDE_ClassWork;
 
+import lombok.AllArgsConstructor;
+
 import java.util.Random;
 
+@AllArgsConstructor
 public class BankAccount {
     public int money;
 
