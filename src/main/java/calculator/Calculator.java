@@ -3,16 +3,25 @@ package calculator;
 import lombok.AllArgsConstructor;
 
 import java.util.HashMap;
+import java.util.List;
 
 @AllArgsConstructor
-public class Calculator {
+public class Calculator<T extends Number> {
     private final HashMap<String, Operation> operations;
-    private Input<Integer> input;
-    private Output<Integer> output;
+    private Input<T> input;
+    private Output output;
 
     public void calculate(String operation){
-        Data<Integer> data = new Data<>(input.read());
-        operations.get(operation).make(data);
-        output.print(data);
+        Data<T> inputData = new Data<>(input.read());
+        Operation currentOperation = operations.get(operation);
+
+         double result = 0.0;
+        for(T d : inputData.getData()){
+            result += currentOperation.make(result,d).doubleValue();
+        }
+
+        Data<Double> outputData = new Data<>(List.of(result));
+
+        output.print(outputData);
     }
 }

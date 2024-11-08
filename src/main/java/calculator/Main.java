@@ -10,20 +10,16 @@ public class Main {
         operationHashMap.put("-", new Min());
         operationHashMap.put("*", new Mult());
         operationHashMap.put("/", new Div());
-        Calculator calculator = new Calculator(operationHashMap);
+        Calculator<Number> calculator = new Calculator<>(operationHashMap,
+                new Input<>(new Numbers(1,2,4,5)),
+                new ConsoleOutput());
 
         Scanner scanner = new Scanner(System.in);
-
-        System.out.print("Введите первое число: ");
-        int firstNum = scanner.nextInt();
-
-        System.out.print("Введите второе число: ");
-        int secondNum = scanner.nextInt();
 
         System.out.print("Введите операцию: ");
         String operation = scanner.next();
 
-        calculator.calculate(firstNum,secondNum,operation);
+        calculator.calculate(operation);
 
         scanner.close();
     }
