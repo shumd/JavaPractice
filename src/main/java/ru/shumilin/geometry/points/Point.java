@@ -5,8 +5,8 @@ import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode()
 public class Point implements Comparable<Point>{
-    int x;
-    int y;
+    public int x;
+    public int y;
 
     public Point(int x, int y){
         this.x = x;

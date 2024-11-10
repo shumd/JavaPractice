@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class PointWithProperty {
-    int x;
+    public int x;
     private final List<Property> properties;
 
     public PointWithProperty(int x, Property... properties){
