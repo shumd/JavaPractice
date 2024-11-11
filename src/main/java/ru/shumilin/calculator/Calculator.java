@@ -17,7 +17,7 @@ public class Calculator<T extends Number> {
         Data<T> inputData = new Data<>(input.read());
         Operation currentOperation = operations.get(operation);
 
-         double result = 0.0;
+        double result = 0.0;
         for(T d : inputData.getData()){
             result += currentOperation.make(result,d).doubleValue();
         }

@@ -1,4 +1,4 @@
-package ru.shumilin.calculator;
+package ru.shumilin.calculator.readables;
 
 import java.util.List;
 

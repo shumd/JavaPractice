@@ -1,8 +1,20 @@
 package ru.shumilin.main;
 
-import ru.shumilin.cities.City;
-import ru.shumilin.cities.DoubleWayCity;
-import ru.shumilin.cities.Way;
+import ru.shumilin.calculator.Calculator;
+import ru.shumilin.calculator.Input;
+import ru.shumilin.calculator.readables.Numbers;
+import ru.shumilin.calculator.operations.*;
+import ru.shumilin.calculator.outputs.ConsoleOutput;
+import ru.shumilin.geometry.points.Point;
+import ru.shumilin.numbers.Fraction;
+import ru.shumilin.other.Summator;
+
+import java.math.BigInteger;
+import java.util.HashMap;
+import java.util.Scanner;
+
+import static java.lang.Integer.parseInt;
+import static java.lang.Math.pow;
 
 public class Main {
     public static void main(String[] args) {
@@ -1086,26 +1098,67 @@ public class Main {
 //        System.out.println(polyline.hashCode() == polyline2.hashCode());
 
         // 3.4.5 Сравнение городов
-        City saratov = new City("Saratov");
-        City gorny = new City("Gorny");
-        DoubleWayCity engels = new DoubleWayCity("Engels");
-        City balakovo = new City("Balakovo");
+//        City saratov = new City("Saratov");
+//        City gorny = new City("Gorny");
+//        DoubleWayCity engels = new DoubleWayCity("Engels");
+//        City balakovo = new City("Balakovo");
+//
+//        engels.addWay(new Way(balakovo,5));
+//        System.out.println(engels);
+//
+//        saratov.addWay(new Way(balakovo,5));
+//        saratov.addWay(new Way(engels,5));
+//        System.out.println(saratov);
+//
+//        gorny.addWay(new Way(balakovo,5));
+//        System.out.println(gorny);
+//
+//        System.out.println(balakovo);
+//
+//        System.out.println(engels.equals(gorny));
+//        System.out.println(engels.getWays());
+//        System.out.println(gorny.getWays());
+//        System.out.println(engels.getWays().equals(gorny.getWays()));
 
-        engels.addWay(new Way(balakovo,5));
-        System.out.println(engels);
+        // калькулятор
+        HashMap<String, Operation> operationHashMap = new HashMap<>();
+        operationHashMap.put("+", new Sum());
+        operationHashMap.put("-", new Min());
+        operationHashMap.put("*", new Mult());
+        operationHashMap.put("/", new Div());
+        Calculator<Number> calculator = new Calculator<>(operationHashMap,
+                new Input<>(new Numbers(1,2,4,5, new Fraction(2,5))),
+                new ConsoleOutput());
 
-        saratov.addWay(new Way(balakovo,5));
-        saratov.addWay(new Way(engels,5));
-        System.out.println(saratov);
+        Scanner scanner = new Scanner(System.in);
 
-        gorny.addWay(new Way(balakovo,5));
-        System.out.println(gorny);
+        System.out.print("Введите операцию: ");
+        String operation = scanner.next();
 
-        System.out.println(balakovo);
+        calculator.calculate(operation);
 
-        System.out.println(engels.equals(gorny));
-        System.out.println(engels.getWays());
-        System.out.println(gorny.getWays());
-        System.out.println(engels.getWays().equals(gorny.getWays()));
+        scanner.close();
+
+        // 4.1.3 Сложение из пакетов
+        Summator summator = new Summator();
+        System.out.println(summator.sum(7,
+                new Fraction(11,3),
+                3.21,
+                new BigInteger("12345678912345678912")));
+
+        // 4.1.4 Возведение в степень
+        System.out.println(myPow(args[0],args[1]));
+
+        // 4.1.5 Простые имена
+        Point myPoint = new Point(1,2);
+        java.awt.Point point = new java.awt.Point(1,2);
+    }
+
+    // 4.1.4 Возведение в степень
+    public static double myPow(String x, String y){
+        int num = parseInt(x);
+        int pow = parseInt(y);
+
+        return pow(num,pow);
     }
 }
