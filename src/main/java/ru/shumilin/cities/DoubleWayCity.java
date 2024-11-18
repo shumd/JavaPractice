@@ -1,6 +1,5 @@
 package ru.shumilin.cities;
 
-//@EqualsAndHashCode(callSuper = true) FALSE ВЫВОДИТ
 public class DoubleWayCity extends City{
     public DoubleWayCity(String name, Way... ways){
         super(name, ways);

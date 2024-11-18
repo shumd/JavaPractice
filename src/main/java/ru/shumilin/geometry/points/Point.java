@@ -1,10 +1,11 @@
 package ru.shumilin.geometry.points;
 
 import lombok.EqualsAndHashCode;
+import lombok.SneakyThrows;
 
 
 @EqualsAndHashCode()
-public class Point implements Comparable<Point>{
+public class Point implements Comparable<Point>, Cloneable {
     public int x;
     public int y;
 
@@ -28,5 +29,10 @@ public class Point implements Comparable<Point>{
             return y-point.y;
         }
         return x-point.x;
+    }
+
+    @Override @SneakyThrows
+    public Point clone() {
+        return (Point) super.clone();
     }
 }

@@ -2,11 +2,12 @@ package ru.shumilin.geometry.lines;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.SneakyThrows;
 import ru.shumilin.geometry.points.Point;
 
 @Getter
 @EqualsAndHashCode()
-public class Line implements Lengthable, Polylineable {
+public class Line implements Lengthable, Polylineable, Cloneable {
     private Point start;
     private Point end;
 
@@ -48,6 +49,14 @@ public class Line implements Lengthable, Polylineable {
     @Override
     public String toString() {
         return "Линия от " + start + " до " + end;
+    }
+
+    @Override @SneakyThrows
+    public Line clone() {
+        Line res = (Line) super.clone();
+        res.start = start.clone();
+        res.end = end.clone();
+        return res;
     }
 }
 

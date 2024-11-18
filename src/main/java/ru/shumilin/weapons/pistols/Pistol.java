@@ -1,6 +1,9 @@
 package ru.shumilin.weapons.pistols;
 
+import lombok.Getter;
+
 public class Pistol {
+    @Getter
     private int ammo;
     private final int magazineSize;
 
@@ -16,10 +19,6 @@ public class Pistol {
 
         this.ammo = ammo;
         this.magazineSize = magazineSize;
-    }
-
-    public int getAmmo(){
-        return ammo;
     }
 
     public boolean isEmpty(){

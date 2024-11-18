@@ -1,10 +1,10 @@
 package ru.shumilin.numbers;
 
 import lombok.EqualsAndHashCode;
-
+import lombok.SneakyThrows;
 
 @EqualsAndHashCode(callSuper = false)
-public final class Fraction extends Number{
+public final class Fraction extends Number implements Cloneable {
     private final int numerator;
     private final int denominator;
 
@@ -131,5 +131,10 @@ public final class Fraction extends Number{
     @Override
     public String toString() {
         return numerator + "/" + denominator;
+    }
+
+    @Override @SneakyThrows
+    public Fraction clone(){
+        return (Fraction) super.clone();
     }
 }

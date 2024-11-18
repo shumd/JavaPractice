@@ -27,11 +27,8 @@ public class Rifle extends Weapon {
     }
 
     public int disCharge(){
-        int res = ammo();
-
-        while(ammo() != 0){
-            getAmmo();
-        }
+        int res = ammo;
+        ammo = 0;
         return res;
     }
 
