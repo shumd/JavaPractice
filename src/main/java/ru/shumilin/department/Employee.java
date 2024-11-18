@@ -1,12 +1,16 @@
 package ru.shumilin.department;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Arrays;
 import java.util.Objects;
 
+@Getter @EqualsAndHashCode
 public class Employee {
-    private String name;
-    private Department department;
-
+    String name;
+    Department department;
 
     public Employee(String name){
         this(name, null);
@@ -19,43 +23,12 @@ public class Employee {
         setDepartment(department);
     }
 
-    public String getName() {
-        return name;
-    }
-
     public void setDepartment(Department department){
-        if(this.department != null) {
-            if (this.department == department) {
-                return;
-            }
-            if (this.department.getHead() == this) {
-                this.department.setHead(null);
-            }
-            this.department.removeEmployee(this);
-            this.department = department;
-        }else {
-            this.department = department;
-        }
-        if(this.department != null) {
-            this.department.addEmployee(this);
-        }
-    }
-    public Department getDepartment(){
-        return department;
-    }
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Employee employee = (Employee) o;
-        return Objects.equals(name, employee.name) && Objects.equals(department, employee.department);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, department);
+        if(this.department == department) return;
+        if(this.department != null) this.department.employees.remove(this);
+        if(this.department != null && this.department.head == this) this.department.head = null;
+        this.department = department;
+        if(this.department != null) this.department.employees.add(this);
     }
 
     @Override
@@ -64,24 +37,24 @@ public class Employee {
             return name;
         }
         String result;
-        String[] employeesNames = new String[department.getEmployees().size()];
+        String[] employeesNames = new String[department.employees.size()];
 
-        for (int i = 0; i < department.getEmployees().size(); i++){
-            employeesNames[i] = department.getEmployees().get(i).name;
+        for (int i = 0; i < department.employees.size(); i++){
+            employeesNames[i] = department.employees.get(i).name;
         }
 
 
-        if (department.getHead() == this){
-            result = name + " начальник отдела " + department.getName()
+        if (department.head == this){
+            result = name + " начальник отдела " + department.name
                     + ": " + Arrays.toString(employeesNames);
         }else
-            if(department.getHead() == null){
+            if(department.head == null){
             result = name + " начальник отдела " + null +
                     " : " + Arrays.toString(employeesNames);
         }else {
-                result = name + " работает в отделе " + department.getName()
+                result = name + " работает в отделе " + department.name
                         + ": " + Arrays.toString(employeesNames)
-                        + ", начальник которого " + department.getHead().name
+                        + ", начальник которого " + department.head.name
                 ;
         }
 
