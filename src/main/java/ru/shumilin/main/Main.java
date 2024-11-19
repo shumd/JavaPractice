@@ -5,6 +5,8 @@ import ru.shumilin.calculator.Input;
 import ru.shumilin.calculator.readables.Numbers;
 import ru.shumilin.calculator.operations.*;
 import ru.shumilin.calculator.outputs.ConsoleOutput;
+import ru.shumilin.geometry.lines.Line;
+import ru.shumilin.geometry.lines.Polyline;
 import ru.shumilin.geometry.points.Point;
 import ru.shumilin.numbers.Fraction;
 import ru.shumilin.other.Summator;
@@ -1121,38 +1123,52 @@ public class Main {
 //        System.out.println(engels.getWays().equals(gorny.getWays()));
 
         // калькулятор
-        HashMap<String, Operation> operationHashMap = new HashMap<>();
-        operationHashMap.put("+", new Sum());
-        operationHashMap.put("-", new Min());
-        operationHashMap.put("*", new Mult());
-        operationHashMap.put("/", new Div());
-        Calculator<Number> calculator = new Calculator<>(operationHashMap,
-                new Input<>(new Numbers(1,2,4,5, new Fraction(2,5))),
-                new ConsoleOutput());
+//        HashMap<String, Operation> operationHashMap = new HashMap<>();
+//        operationHashMap.put("+", new Sum());
+//        operationHashMap.put("-", new Min());
+//        operationHashMap.put("*", new Mult());
+//        operationHashMap.put("/", new Div());
+//        Calculator<Number> calculator = new Calculator<>(operationHashMap,
+//                new Input<>(new Numbers(1,2,4,5, new Fraction(2,5))),
+//                new ConsoleOutput());
+//
+//        Scanner scanner = new Scanner(System.in);
+//
+//        System.out.print("Введите операцию: ");
+//        String operation = scanner.next();
+//
+//        calculator.calculate(operation);
+//
+//        scanner.close();
+//
+//        // 4.1.3 Сложение из пакетов
+//        Summator summator = new Summator();
+//        System.out.println(summator.sum(7,
+//                new Fraction(11,3),
+//                3.21,
+//                new BigInteger("12345678912345678912")));
+//
+//        // 4.1.4 Возведение в степень
+//        System.out.println(myPow(args[0],args[1]));
+//
+//        // 4.1.5 Простые имена
+//        Point myPoint = new Point(1,2);
+//        java.awt.Point point = new java.awt.Point(1,2);
 
-        Scanner scanner = new Scanner(System.in);
+        Polyline polyline1 = new Polyline(new Point(1,2),
+                new Point(3,4),
+                new Point(5,6));
 
-        System.out.print("Введите операцию: ");
-        String operation = scanner.next();
+        Polyline polyline2 = new Polyline(new Point(5,6),
+                new Point(3,4),
+                new Point(1,2));
 
-        calculator.calculate(operation);
-
-        scanner.close();
-
-        // 4.1.3 Сложение из пакетов
-        Summator summator = new Summator();
-        System.out.println(summator.sum(7,
-                new Fraction(11,3),
-                3.21,
-                new BigInteger("12345678912345678912")));
-
-        // 4.1.4 Возведение в степень
-        System.out.println(myPow(args[0],args[1]));
-
-        // 4.1.5 Простые имена
-        Point myPoint = new Point(1,2);
-        java.awt.Point point = new java.awt.Point(1,2);
+        System.out.println(polyline1.equals(polyline2));
+        System.out.println(polyline1.hashCode() == polyline2.hashCode());
+        
     }
+
+    // 7.3.2
 
     // 4.1.4 Возведение в степень
     public static double myPow(String x, String y){

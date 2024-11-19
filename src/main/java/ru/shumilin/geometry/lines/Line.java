@@ -5,8 +5,9 @@ import lombok.Getter;
 import lombok.SneakyThrows;
 import ru.shumilin.geometry.points.Point;
 
+import java.util.Objects;
+
 @Getter
-@EqualsAndHashCode()
 public class Line implements Lengthable, Polylineable, Cloneable {
     private Point start;
     private Point end;
@@ -49,6 +50,20 @@ public class Line implements Lengthable, Polylineable, Cloneable {
     @Override
     public String toString() {
         return "Линия от " + start + " до " + end;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Line line = (Line) o;
+        return Objects.equals(start, line.start) && Objects.equals(end, line.end) ||
+                Objects.equals(end, line.start) && Objects.equals(start, line.end);
+    }
+
+    @Override
+    public int hashCode() {
+        return start.hashCode() + end.hashCode();
     }
 
     @Override @SneakyThrows

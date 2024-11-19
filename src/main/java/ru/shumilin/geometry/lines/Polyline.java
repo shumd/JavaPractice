@@ -1,13 +1,13 @@
 package ru.shumilin.geometry.lines;
 
 import lombok.EqualsAndHashCode;
+import lombok.SneakyThrows;
 import ru.shumilin.geometry.points.Point;
 
 import java.util.*;
 
-@EqualsAndHashCode()
-public class Polyline implements Lengthable, Polylineable {
-    private final List<Point> points;
+public class Polyline implements Lengthable, Polylineable, Cloneable {
+    private List<Point> points;
 
     public Polyline(Point... args){
         this(new ArrayList<>(Arrays.asList(args)));
@@ -44,6 +44,38 @@ public class Polyline implements Lengthable, Polylineable {
         return res;
     }
 
+    private List<Point> normalize() {return null;} // Заглушка
+
+    // Включить нормализацию
+    private List<Line> getLines(){
+        List<Line> res = new ArrayList<>();
+
+        for(int i = 1; i < points.size(); i++){
+            res.add(new Line(points.get(--i),points.get(i)));
+        }
+
+        return res;
+    }
+
+    @Override
+    public final boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Polyline polyline)) return false;
+        return getLines().equals(polyline.getLines()) ||
+                getLines().equals(polyline.getLines().reversed());
+    }
+
+    @Override
+    public final int hashCode() {
+        int res = 0;
+
+        for(Line line : getLines()){
+            res += line.hashCode();
+        }
+
+        return res;
+    }
+
     @Override
     public Polyline polyline() {
         return this;
@@ -52,5 +84,12 @@ public class Polyline implements Lengthable, Polylineable {
     @Override
     public String toString() {
         return "Линия " + points;
+    }
+
+    @Override @SneakyThrows
+    public Polyline clone(){
+        Polyline res = (Polyline) super.clone();
+        res.points = List.copyOf(points);
+        return res;
     }
 }
