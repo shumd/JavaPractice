@@ -1,10 +1,10 @@
 package ru.shumilin.cities;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
+import java.util.Objects;
+
 @Getter
-@EqualsAndHashCode
 public class Way {
     private final City cityTo;
     private int price;
@@ -24,6 +24,19 @@ public class Way {
         }
 
         this.price = price;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Way way = (Way) o;
+        return price == way.price && cityTo == way.cityTo;
+    }
+
+    @Override
+    public int hashCode() {
+        return cityTo.getName().length()*31 + price;
     }
 
     @Override

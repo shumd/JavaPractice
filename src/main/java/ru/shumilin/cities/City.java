@@ -1,12 +1,11 @@
 package ru.shumilin.cities;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-@EqualsAndHashCode(exclude = {"name"})
 public class City {
     @Getter
     private final String name;
@@ -41,6 +40,36 @@ public class City {
                 return;
             }
         }
+    }
+
+    @Override
+    public final boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof City city)) return false;
+        if (getWays().size() != city.getWays().size()) return false;
+        List<Way> otherWays = city.getWays();
+
+        for (Way way : ways) {
+            for (int j = 0; j < otherWays.size(); j++) {
+                if (way.equals(otherWays.get(j))) {
+                    otherWays.remove(j);
+                    break;
+                }
+            }
+        }
+
+        return otherWays.isEmpty();
+    }
+
+    @Override
+    public final int hashCode() {
+        int waysHash = 0;
+
+        for(Way way : ways){
+            waysHash += way.hashCode();
+        }
+
+        return waysHash;
     }
 
     @Override

@@ -5,6 +5,9 @@ import ru.shumilin.calculator.Input;
 import ru.shumilin.calculator.readables.Numbers;
 import ru.shumilin.calculator.operations.*;
 import ru.shumilin.calculator.outputs.ConsoleOutput;
+import ru.shumilin.cities.City;
+import ru.shumilin.cities.DoubleWayCity;
+import ru.shumilin.cities.Way;
 import ru.shumilin.geometry.lines.Line;
 import ru.shumilin.geometry.lines.Polyline;
 import ru.shumilin.geometry.points.Point;
@@ -1100,27 +1103,27 @@ public class Main {
 //        System.out.println(polyline.hashCode() == polyline2.hashCode());
 
         // 3.4.5 Сравнение городов
-//        City saratov = new City("Saratov");
-//        City gorny = new City("Gorny");
-//        DoubleWayCity engels = new DoubleWayCity("Engels");
-//        City balakovo = new City("Balakovo");
-//
-//        engels.addWay(new Way(balakovo,5));
-//        System.out.println(engels);
-//
-//        saratov.addWay(new Way(balakovo,5));
-//        saratov.addWay(new Way(engels,5));
-//        System.out.println(saratov);
-//
-//        gorny.addWay(new Way(balakovo,5));
-//        System.out.println(gorny);
-//
-//        System.out.println(balakovo);
-//
-//        System.out.println(engels.equals(gorny));
-//        System.out.println(engels.getWays());
-//        System.out.println(gorny.getWays());
-//        System.out.println(engels.getWays().equals(gorny.getWays()));
+        City saratov = new City("Saratov");
+        City gorny = new City("Gorny");
+        DoubleWayCity engels = new DoubleWayCity("Engels");
+        City balakovo = new City("Balakovo");
+
+        engels.addWay(new Way(balakovo,5));
+        engels.addWay(new Way(saratov,5));
+        System.out.println(engels);
+
+        saratov.addWay(new Way(balakovo,5));
+        saratov.addWay(new Way(engels,5));
+        System.out.println(saratov);
+
+        gorny.addWay(new Way(saratov,5));
+        gorny.addWay(new Way(balakovo,5));
+        System.out.println(gorny);
+
+        System.out.println(balakovo);
+
+        System.out.println(engels.equals(gorny));
+        System.out.println(engels.hashCode() == gorny.hashCode());
 
         // калькулятор
 //        HashMap<String, Operation> operationHashMap = new HashMap<>();
@@ -1154,17 +1157,17 @@ public class Main {
 //        // 4.1.5 Простые имена
 //        Point myPoint = new Point(1,2);
 //        java.awt.Point point = new java.awt.Point(1,2);
-
-        Polyline polyline1 = new Polyline(new Point(1,2),
-                new Point(3,4),
-                new Point(5,6));
-
-        Polyline polyline2 = new Polyline(new Point(5,6),
-                new Point(3,4),
-                new Point(1,2));
-
-        System.out.println(polyline1.equals(polyline2));
-        System.out.println(polyline1.hashCode() == polyline2.hashCode());
+//
+//        Polyline polyline1 = new Polyline(new Point(1,2),
+//                new Point(3,4),
+//                new Point(5,6));
+//
+//        Polyline polyline2 = new Polyline(new Point(5,6),
+//                new Point(3,4),
+//                new Point(1,2));
+//
+//        System.out.println(polyline1.equals(polyline2));
+//        System.out.println(polyline1.hashCode() == polyline2.hashCode());
         
     }
 

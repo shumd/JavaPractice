@@ -15,18 +15,6 @@ public class DoubleWayCity extends City{
         super.addWay(way);
         way.getCityTo().addWay(new Way(this, way.getPrice()));
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof City)) return false;
-        return super.equals(o);
-    }
-
-    @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
 }
 
 
