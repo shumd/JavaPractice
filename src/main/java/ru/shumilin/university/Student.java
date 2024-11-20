@@ -1,22 +1,22 @@
 package ru.shumilin.university;
 
 import lombok.Getter;
+import ru.shumilin.university.graduationSystems.GraduationSystem;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Student {
-    private static final int MIN_MARK = 2;
-    private static final int MAX_MARK = 5;
-
+    private GraduationSystem graduationSystem;
     @Getter
     private String name;
     private List<Integer> marks = new ArrayList<>();
 
 
-    public Student(String name, Integer...marks){
+    public Student(String name, GraduationSystem graduationSystem,Integer...marks){
         setName(name);
         addMarks(marks);
+        this.graduationSystem = graduationSystem;
     }
 
     public void setName(String name) {
@@ -39,7 +39,7 @@ public class Student {
 
     public void addMarks(Integer... marks){
         for (Integer i : marks){
-            if(i < MIN_MARK || i > MAX_MARK){
+            if(i < graduationSystem.getMinMark() || i > graduationSystem.getMaxMark()){
                 throw new IllegalMarkException(i);
             }
             this.marks.add(i);
@@ -60,7 +60,7 @@ public class Student {
     }
 
     public boolean isExcellentStudent(){
-        return averageMark()==MAX_MARK;
+        return averageMark()==graduationSystem.getMaxMark();
     }
 
     @Override
