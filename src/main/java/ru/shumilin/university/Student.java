@@ -5,6 +5,7 @@ import ru.shumilin.university.graduationSystems.GraduationSystem;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Student {
     private GraduationSystem graduationSystem;
@@ -15,8 +16,8 @@ public class Student {
 
     public Student(String name, GraduationSystem graduationSystem,Integer...marks){
         setName(name);
-        addMarks(marks);
         this.graduationSystem = graduationSystem;
+        addMarks(marks);
     }
 
     public void setName(String name) {
@@ -61,6 +62,19 @@ public class Student {
 
     public boolean isExcellentStudent(){
         return averageMark()==graduationSystem.getMaxMark();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Student student = (Student) o;
+        return Objects.equals(name, student.name) && Objects.equals(averageMark(), student.averageMark());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(name) + Objects.hashCode(averageMark());
     }
 
     @Override

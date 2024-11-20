@@ -11,9 +11,14 @@ import ru.shumilin.cities.Way;
 import ru.shumilin.geometry.lines.Line;
 import ru.shumilin.geometry.lines.Polyline;
 import ru.shumilin.geometry.points.Point;
+import ru.shumilin.karate.Combination;
+import ru.shumilin.karate.KarateFighter;
 import ru.shumilin.numbers.Fraction;
 import ru.shumilin.other.Summator;
+import ru.shumilin.university.Student;
+import ru.shumilin.university.graduationSystems.UniversityGraduationSystem;
 
+import java.awt.*;
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -434,7 +439,6 @@ public class Main {
 //        System.out.println(petrov);
 //        System.out.println(kozlov);
 //        System.out.println(sidorov);
-
 
 
         // ------------------------С ПОМОЩЬЮ LIST----------------------------------
@@ -1103,27 +1107,27 @@ public class Main {
 //        System.out.println(polyline.hashCode() == polyline2.hashCode());
 
         // 3.4.5 Сравнение городов
-        City saratov = new City("Saratov");
-        City gorny = new City("Gorny");
-        DoubleWayCity engels = new DoubleWayCity("Engels");
-        City balakovo = new City("Balakovo");
-
-        engels.addWay(new Way(balakovo,5));
-        engels.addWay(new Way(saratov,5));
-        System.out.println(engels);
-
-        saratov.addWay(new Way(balakovo,5));
-        saratov.addWay(new Way(engels,5));
-        System.out.println(saratov);
-
-        gorny.addWay(new Way(saratov,5));
-        gorny.addWay(new Way(balakovo,5));
-        System.out.println(gorny);
-
-        System.out.println(balakovo);
-
-        System.out.println(engels.equals(gorny));
-        System.out.println(engels.hashCode() == gorny.hashCode());
+//        City saratov = new City("Saratov");
+//        City gorny = new City("Gorny");
+//        DoubleWayCity engels = new DoubleWayCity("Engels");
+//        City balakovo = new City("Balakovo");
+//
+//        engels.addWay(new Way(balakovo,5));
+//        engels.addWay(new Way(saratov,5));
+//        System.out.println(engels);
+//
+//        saratov.addWay(new Way(balakovo,5));
+//        saratov.addWay(new Way(engels,5));
+//        System.out.println(saratov);
+//
+//        gorny.addWay(new Way(saratov,5));
+//        gorny.addWay(new Way(balakovo,5));
+//        System.out.println(gorny);
+//
+//        System.out.println(balakovo);
+//
+//        System.out.println(engels.equals(gorny));
+//        System.out.println(engels.hashCode() == gorny.hashCode());
 
         // калькулятор
 //        HashMap<String, Operation> operationHashMap = new HashMap<>();
@@ -1168,16 +1172,31 @@ public class Main {
 //
 //        System.out.println(polyline1.equals(polyline2));
 //        System.out.println(polyline1.hashCode() == polyline2.hashCode());
-        
+
+        // -----------------------------------------НОВЫЙ ЗАДАЧНИК-------------------------------------------------
+        // 5.1.6 StudentsEquals
+//        Student vasya = new Student("Vasya", new UniversityGraduationSystem(), 1,3,4,5,4);
+//        Student vasyok = new Student("Vasya", new UniversityGraduationSystem(), 1,4,4,5,3);
+//
+//        System.out.println(vasya.equals(vasyok));
+//        System.out.println(vasya.hashCode() == vasyok.hashCode());
+
+        // 7.3.2 Малыш каратист
+        Combination combo = new Combination(new HashMap<>());
+        combo.addPunch(1,()-> "бац!");
+        combo.addPunch(2,()-> "кия!");
+        combo.addPunch(3,()-> "вжух!");
+
+        KarateFighter petya = new KarateFighter("Petya", combo);
+        petya.doCombination(1,3,2,1);
     }
 
-    // 7.3.2
 
     // 4.1.4 Возведение в степень
-    public static double myPow(String x, String y){
+    public static double myPow(String x, String y) {
         int num = parseInt(x);
         int pow = parseInt(y);
 
-        return pow(num,pow);
+        return pow(num, pow);
     }
 }

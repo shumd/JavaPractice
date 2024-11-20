@@ -36,7 +36,7 @@ public class Way {
 
     @Override
     public int hashCode() {
-        return cityTo.getName().length()*31 + price;
+        return cityTo.getName().hashCode()*31 + price;
     }
 
     @Override
