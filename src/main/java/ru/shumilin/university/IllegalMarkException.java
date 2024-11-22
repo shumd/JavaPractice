@@ -13,4 +13,5 @@ public class IllegalMarkException extends RuntimeException {
     public IllegalMarkException(String message){
         super(message);
     }
+    public IllegalMarkException(){super();}
 }

@@ -46,6 +46,9 @@ public class Student {
             this.marks.add(i);
         }
     }
+    public void removeMark(int index){
+        marks.remove(index);
+    }
 
 
     public double averageMark(){

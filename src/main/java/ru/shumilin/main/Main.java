@@ -1,32 +1,15 @@
 package ru.shumilin.main;
 
-import ru.shumilin.calculator.Calculator;
-import ru.shumilin.calculator.Input;
-import ru.shumilin.calculator.readables.Numbers;
-import ru.shumilin.calculator.operations.*;
-import ru.shumilin.calculator.outputs.ConsoleOutput;
-import ru.shumilin.cities.City;
-import ru.shumilin.cities.DoubleWayCity;
-import ru.shumilin.cities.Way;
-import ru.shumilin.geometry.lines.Line;
-import ru.shumilin.geometry.lines.Polyline;
-import ru.shumilin.geometry.points.Point;
-import ru.shumilin.karate.Combination;
-import ru.shumilin.karate.KarateFighter;
-import ru.shumilin.karate.punches.FistPunch;
-import ru.shumilin.karate.punches.JumpPunch;
-import ru.shumilin.karate.punches.LegPunch;
-import ru.shumilin.numbers.Fraction;
-import ru.shumilin.other.Summator;
+import ru.shumilin.connection.Connection;
+import ru.shumilin.connection.ConnectionLostException;
+import ru.shumilin.university.IllegalMarkException;
 import ru.shumilin.university.Student;
+import ru.shumilin.university.graduationSystems.GraduationSystem;
+import ru.shumilin.university.graduationSystems.SchoolGraduationSystem;
 import ru.shumilin.university.graduationSystems.UniversityGraduationSystem;
 
-import java.awt.*;
-import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.Scanner;
 
 import static java.lang.Integer.parseInt;
 import static java.lang.Math.pow;
@@ -1188,6 +1171,28 @@ public class Main {
 
         // 7.3.2 Малыш каратист | Шаблон Action
 
+        // 4.2.1 Читаем данные
+//        readData();
+
+        // 4.2.2 Складываем строки
+        System.out.println(stringConcat("5","5","asdas%", "15"));
+
+        //4.2.3 Добавляем оценки
+//        List<Student> students = List.of(
+//                new Student("vasya",new UniversityGraduationSystem(), 2,3,4),
+//                new Student("petya",new SchoolGraduationSystem(), 1,3),
+//                new Student("artem",new UniversityGraduationSystem())
+//        );
+//
+//        addMarks(students);
+//        System.out.println(students);
+
+        //4.2.4 Восстановление студентов
+        System.out.println(convert(
+                List.of("vasya university","petya school","fedor school"),
+                List.of("1 2 3 4","2 3 4 5", "2 3 5 6")
+
+        ));
     }
 
     // 6.1
@@ -1199,4 +1204,99 @@ public class Main {
 
         return pow(num, pow);
     }
+
+    // -------------------------НОВЫЙ ЗАДАЧНИК--------------------------
+    //4.2.1
+    public static void readData(){
+        Connection connection = new Connection("ermakov.edu");
+
+        try {
+            for (int i = 0; i < 10; i++) {
+                connection.getData();
+            }
+        }catch (ConnectionLostException e) {
+            throw new RuntimeException(e);
+        }
+        finally {
+            connection.close();
+        }
+    }
+
+    //4.2.2 Складываем строки
+    public static double stringConcat(String... strings) {
+        List<Double> doubles = new ArrayList<>();
+        double sum = 0.0;
+
+        for(String s : strings) {
+            try{
+                doubles.add(Double.parseDouble(s));
+            }catch (NumberFormatException ignored){}
+        }
+
+        for(int i = 1; i < doubles.size(); i++) {
+            sum += doubles.get(i);
+        }
+
+        return doubles.getFirst()/sum;
+    }
+
+    //4.2.3
+    public static void addMarks(List<Student> students) {
+        Random random = new Random();
+
+        for(Student student : students) {
+            try {
+                student.addMarks(random.nextInt(10-2)+1);
+            }catch (IllegalMarkException e){
+                for(Student wrongStudent : students) {
+                    if(wrongStudent.equals(student)) break;
+                    wrongStudent.removeMark(wrongStudent.getMarks().size()-1);
+                }
+
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    //4.2.4 Восстановление студентов
+    public static List<Student> convert(
+            List<String> constructorArgs,
+            List<String> addArgs) {
+        List<Student> res = new ArrayList<>();
+
+        for(int i = 0 ; i < constructorArgs.size(); i++) {
+            String[] constructor = constructorArgs.get(i).split(" ");
+
+            String constructorMessage = "Студента " + constructor[0] + " создать невозможно";
+
+            if(constructor.length != 2) {
+                throw new RuntimeException(constructorMessage);
+            }
+
+            try {
+                Integer[] add = new Integer[0];
+                if(addArgs != null && !addArgs.isEmpty()) {
+                    add = Arrays.stream(addArgs.get(i).split(" "))
+                            .map(Integer::parseInt)
+                            .toArray(Integer[]::new);
+                }
+
+                GraduationSystem system;
+
+                switch (constructor[1]) {
+                    case "university" -> system = new UniversityGraduationSystem();
+                    case "school" -> system = new SchoolGraduationSystem();
+                    default -> throw new RuntimeException(constructorMessage);
+                }
+
+                res.add(new Student(constructor[0], system,
+                        add));
+            }catch (NumberFormatException | IllegalMarkException e){
+                return convert(constructorArgs, new ArrayList<>());
+            }
+        }
+
+        return res;
+    }
+
 }

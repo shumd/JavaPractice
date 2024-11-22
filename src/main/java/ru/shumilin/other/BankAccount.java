@@ -1,6 +1,7 @@
-package ru.shumilin.bank;
+package ru.shumilin.other;
 
 import lombok.AllArgsConstructor;
+import ru.shumilin.connection.ConnectionLostException;
 
 import java.util.Random;
 
@@ -8,7 +9,7 @@ import java.util.Random;
 public class BankAccount {
     public int money;
 
-    public static void updateDatabase() throws ConnectionLostException{
+    public static void updateDatabase() throws ConnectionLostException {
         Random r = new Random();
         if(r.nextBoolean()){
             throw new ConnectionLostException();
