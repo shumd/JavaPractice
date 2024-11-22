@@ -6,7 +6,7 @@ import lombok.Setter;
 public class Shooter {
     String name;
     @Setter @Getter
-    Weapon weapon;
+    private Weapon weapon;
 
     public Shooter(String name){
         this.name = name;

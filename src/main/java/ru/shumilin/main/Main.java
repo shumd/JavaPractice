@@ -13,6 +13,9 @@ import ru.shumilin.geometry.lines.Polyline;
 import ru.shumilin.geometry.points.Point;
 import ru.shumilin.karate.Combination;
 import ru.shumilin.karate.KarateFighter;
+import ru.shumilin.karate.punches.FistPunch;
+import ru.shumilin.karate.punches.JumpPunch;
+import ru.shumilin.karate.punches.LegPunch;
 import ru.shumilin.numbers.Fraction;
 import ru.shumilin.other.Summator;
 import ru.shumilin.university.Student;
@@ -20,7 +23,9 @@ import ru.shumilin.university.graduationSystems.UniversityGraduationSystem;
 
 import java.awt.*;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 import static java.lang.Integer.parseInt;
@@ -1181,16 +1186,11 @@ public class Main {
 //        System.out.println(vasya.equals(vasyok));
 //        System.out.println(vasya.hashCode() == vasyok.hashCode());
 
-        // 7.3.2 Малыш каратист
-        Combination combo = new Combination(new HashMap<>());
-        combo.addPunch(1,()-> "бац!");
-        combo.addPunch(2,()-> "кия!");
-        combo.addPunch(3,()-> "вжух!");
+        // 7.3.2 Малыш каратист | Шаблон Action
 
-        KarateFighter petya = new KarateFighter("Petya", combo);
-        petya.doCombination(1,3,2,1);
     }
 
+    // 6.1
 
     // 4.1.4 Возведение в степень
     public static double myPow(String x, String y) {
