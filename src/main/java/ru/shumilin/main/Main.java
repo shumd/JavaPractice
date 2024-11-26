@@ -2,6 +2,11 @@ package ru.shumilin.main;
 
 import ru.shumilin.connection.Connection;
 import ru.shumilin.connection.ConnectionLostException;
+import ru.shumilin.dataStructures.Stack;
+import ru.shumilin.geometry.lines.LineGeneric;
+import ru.shumilin.geometry.points.Point3D;
+import ru.shumilin.storages.Box;
+import ru.shumilin.storages.Storage;
 import ru.shumilin.university.IllegalMarkException;
 import ru.shumilin.university.Student;
 import ru.shumilin.university.graduationSystems.GraduationSystem;
@@ -1175,7 +1180,7 @@ public class Main {
 //        readData();
 
         // 4.2.2 Складываем строки
-        System.out.println(stringConcat("5","5","asdas%", "15"));
+//        System.out.println(stringConcat("5","5","asdas%", "15"));
 
         //4.2.3 Добавляем оценки
 //        List<Student> students = List.of(
@@ -1188,14 +1193,49 @@ public class Main {
 //        System.out.println(students);
 
         //4.2.4 Восстановление студентов
-        System.out.println(convert(
-                List.of("vasya university","petya school","fedor school"),
-                List.of("1 2 3 4","2 3 4 5", "2 3 5 6")
+//        System.out.println(convert(
+//                List.of("vasya university","petya school","fedor school"),
+//                List.of("1 2 3 4","2 3 4 5", "2 3 5 6")
+//
+//        ));
 
-        ));
+        //6.1.1 Обобщенная коробка
+//        Box<Integer> box = new Box<>();
+//        box.setItem(3);
+//        someBoxMethod(box);
+//        System.out.println(box.getItem());
+
+        //6.1.2 Без null
+//        Storage<Integer> s1 = new Storage<>(null,0);
+//        Storage<Integer> s2 = new Storage<>(99,-1);
+//        Storage<String> s3 = new Storage<>(null,"default");
+//        Storage<String> s4 = new Storage<>("hello","hello world");
+//
+//        someStorageMethod(s1);
+//        someStorageMethod(s2);
+//        someStorageMethod(s3);
+//        someStorageMethod(s4);
+
+        // 6.1.4 Сравнимый студент
+//        Student petya = new Student("petya", new SchoolGraduationSystem(),1,2,3,4);
+//        Student vasya = new Student("vasya", new SchoolGraduationSystem(),4,1,2,5);
+//
+//        System.out.println(vasya.compareTo(petya));
+
+        // 6.1.5 Обощенная линия
+//        LineGeneric<Point3D> line3d = new LineGeneric<Point3D>(new Point3D(1,2,5), new Point3D(3,4,6));
+//        System.out.println(line3d);
+
+        // 6.1.6 Стек
+        Stack<String> stringStack = new Stack<>(10);
+        stringStack.push("a");
+        stringStack.push("b");
+        System.out.println(stringStack.peek());
+        System.out.println(stringStack.pop());
+        System.out.println(stringStack.peek());
     }
 
-    // 6.1
+    //--------------------СТАТИЧЕСКИЕ МЕТОДЫ--------------------------
 
     // 4.1.4 Возведение в степень
     public static double myPow(String x, String y) {
@@ -1299,4 +1339,13 @@ public class Main {
         return res;
     }
 
+    //6.1.1 Обобщенная коробка
+    public static <T> void someBoxMethod(Box<T> box){
+        System.out.println(box.getItem());
+    }
+
+    //6.1.2 Без null
+    public static <T> void someStorageMethod(Storage<T> storage){
+        System.out.println(storage.getObject());
+    }
 }

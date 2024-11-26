@@ -1,39 +1,21 @@
 package ru.shumilin.geometry.lines;
 
 import lombok.Getter;
+import lombok.Setter;
 import lombok.SneakyThrows;
 import ru.shumilin.geometry.points.Point;
+import ru.shumilin.geometry.points.Point3D;
 
 import java.util.Objects;
 
-@Getter
-public class Line implements Lengthable, Polylineable, Cloneable {
-    private Point start;
-    private Point end;
+@Getter @Setter
+public class LineGeneric <T extends Point> implements Lengthable, Polylineable, Cloneable {
+    T start;
+    T end;
 
-    public Line(int x1, int y1, int x2, int y2){
-        this(new Point(x1,y1),
-                new Point(x2,y2));
-    }
-
-    public Line(Point start, Point end){
-        setStart(start);
-        setEnd(end);
-    }
-
-
-    public void setStart(Point point){
-        start = new Point(point);
-    }
-    public void setStart(int x, int y){
-        setStart(new Point(x,y));
-    }
-
-    public void setEnd(Point point){
-        end = new Point(point);
-    }
-    public void setEnd(int x, int y){
-        setEnd(new Point(x,y));
+    public LineGeneric(T start, T end){
+        this.start = start;
+        this.end = end;
     }
 
     @Override
@@ -55,7 +37,7 @@ public class Line implements Lengthable, Polylineable, Cloneable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Line line = (Line) o;
+        LineGeneric<T> line = (LineGeneric<T>) o;
         return Objects.equals(start, line.start) && Objects.equals(end, line.end) ||
                 Objects.equals(end, line.start) && Objects.equals(start, line.end);
     }
@@ -66,14 +48,10 @@ public class Line implements Lengthable, Polylineable, Cloneable {
     }
 
     @Override @SneakyThrows
-    public Line clone() {
-        Line res = (Line) super.clone();
+    public LineGeneric clone() {
+        LineGeneric res = (LineGeneric) super.clone();
         res.start = start.clone();
         res.end = end.clone();
         return res;
     }
 }
-
-
-
-

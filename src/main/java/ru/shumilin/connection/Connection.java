@@ -1,8 +1,5 @@
 package ru.shumilin.connection;
 
-import lombok.SneakyThrows;
-import ru.shumilin.other.ClosedResourceException;
-
 import java.util.Random;
 
 public class Connection {

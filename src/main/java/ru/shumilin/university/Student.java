@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Student {
+public class Student implements Comparable<Student> {
     private GraduationSystem graduationSystem;
     @Getter
     private String name;
@@ -65,6 +65,16 @@ public class Student {
 
     public boolean isExcellentStudent(){
         return averageMark()==graduationSystem.getMaxMark();
+    }
+
+    @Override
+    public int compareTo(Student o) {
+        //return (int) (this.averageMark()-o.averageMark()); почему не так?
+        if(this.averageMark()==o.averageMark()){
+            return 0;
+        }else if(this.averageMark()>o.averageMark()){
+            return 1;
+        }else return -1;
     }
 
     @Override
