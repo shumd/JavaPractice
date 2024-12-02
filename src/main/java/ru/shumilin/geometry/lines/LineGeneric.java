@@ -2,7 +2,6 @@ package ru.shumilin.geometry.lines;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.SneakyThrows;
 import ru.shumilin.geometry.points.Point;
 import ru.shumilin.geometry.points.Point3D;
 
@@ -20,6 +19,13 @@ public class LineGeneric <T extends Point> implements Lengthable, Polylineable, 
 
     @Override
     public int length(){
+        if(start instanceof Point3D){
+            Point3D tmpStart = (Point3D) start;
+            Point3D tmpEnd = (Point3D) end;
+
+            return (int)Math.sqrt(Math.pow(end.x - start.x,2) + Math.pow(end.y - start.y,2) + Math.pow(tmpEnd.z - tmpStart.z,2));
+        }
+
         return (int)Math.sqrt(Math.pow(end.x - start.x,2) + Math.pow(end.y - start.y,2));
     }
 
@@ -45,13 +51,5 @@ public class LineGeneric <T extends Point> implements Lengthable, Polylineable, 
     @Override
     public int hashCode() {
         return start.hashCode() + end.hashCode();
-    }
-
-    @Override @SneakyThrows
-    public LineGeneric clone() {
-        LineGeneric res = (LineGeneric) super.clone();
-        res.start = start.clone();
-        res.end = end.clone();
-        return res;
     }
 }
