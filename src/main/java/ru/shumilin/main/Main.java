@@ -1200,31 +1200,20 @@ public class Main {
 //        ));
 
         //6.1.1 Обобщенная коробка
-//        Box<Integer> box = new Box<>();
-//        box.setItem(3);
-//        someBoxMethod(box);
-//        System.out.println(box.getItem());
-
-        //6.1.2 Без null
-//        Storage<Integer> s1 = new Storage<>(null,0);
-//        Storage<Integer> s2 = new Storage<>(99,-1);
-//        Storage<String> s3 = new Storage<>(null,"default");
-//        Storage<String> s4 = new Storage<>("hello","hello world");
-//
-//        someStorageMethod(s1);
-//        someStorageMethod(s2);
-//        someStorageMethod(s3);
-//        someStorageMethod(s4);
+        Box<Integer> box = new Box<>();
+        box.setItem(3);
+        someBoxMethod(box);
+        System.out.println(box.getItem());
 
         // 6.1.4 Сравнимый студент
-//        Student petya = new Student("petya", new SchoolGraduationSystem(),1,2,3,4);
-//        Student vasya = new Student("vasya", new SchoolGraduationSystem(),4,1,2,5);
-//
-//        System.out.println(vasya.compareTo(petya));
+        Student petya = new Student("petya", new SchoolGraduationSystem(),1,2,3,4);
+        Student vasya = new Student("vasya", new SchoolGraduationSystem(),4,1,2,5);
+
+        System.out.println(vasya.compareTo(petya));
 
         // 6.1.5 Обощенная линия
-//        LineGeneric<Point3D> line3d = new LineGeneric<Point3D>(new Point3D(1,2,5), new Point3D(3,4,6));
-//        System.out.println(line3d);
+        LineGeneric<Point3D> line3d = new LineGeneric<Point3D>(new Point3D(1,2,5), new Point3D(3,4,6));
+        System.out.println(line3d);
 
         // 6.1.6 Стек
         Stack<String> stringStack = new Stack<>(10);
@@ -1233,6 +1222,10 @@ public class Main {
         System.out.println(stringStack.peek());
         System.out.println(stringStack.pop());
         System.out.println(stringStack.peek());
+
+        Stack<Student> studentStack = new Stack<>(10);
+        studentStack.push(new Student("vasya",new SchoolGraduationSystem(), 1,2,3));
+        System.out.println(studentStack.peek());
     }
 
     //--------------------СТАТИЧЕСКИЕ МЕТОДЫ--------------------------
@@ -1344,8 +1337,17 @@ public class Main {
         System.out.println(box.getItem());
     }
 
-    //6.1.2 Без null
-    public static <T> void someStorageMethod(Storage<T> storage){
-        System.out.println(storage.getObject());
+
+    // sum
+    public static Storage<Integer> sum(List<Integer> numbers){
+        if(numbers == null || numbers.isEmpty()) return Storage.empty();
+
+        int res = 0;
+
+        for(Integer num : numbers){
+            res += num;
+        }
+
+        return Storage.of(res);
     }
 }

@@ -69,7 +69,6 @@ public class Student implements Comparable<Student> {
 
     @Override
     public int compareTo(Student o) {
-        //return (int) (this.averageMark()-o.averageMark()); почему не так?
         if(this.averageMark()==o.averageMark()){
             return 0;
         }else if(this.averageMark()>o.averageMark()){
