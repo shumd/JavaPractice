@@ -1212,8 +1212,8 @@ public class Main {
         System.out.println(vasya.compareTo(petya));
 
         // 6.1.5 Обощенная линия
-        LineGeneric<Point3D> line3d = new LineGeneric<Point3D>(new Point3D(1,2,5), new Point3D(3,4,6));
-        System.out.println(line3d);
+//        LineGeneric<Point3D> line3d = new LineGeneric<Point3D>(new Point3D(1,2,5), new Point3D(3,4,6));
+//        System.out.println(line3d);
 
         // 6.1.6 Стек
         Stack<String> stringStack = new Stack<>(10);

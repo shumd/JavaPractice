@@ -2,31 +2,49 @@ package ru.shumilin.geometry.lines;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.SneakyThrows;
 import ru.shumilin.geometry.points.Point;
 import ru.shumilin.geometry.points.Point3D;
 
 import java.util.Objects;
 
-@Getter @Setter
 public class LineGeneric <T extends Point> implements Lengthable, Polylineable, Cloneable {
-    T start;
-    T end;
+    private T start, end;
 
-    public LineGeneric(T start, T end){
-        this.start = start;
-        this.end = end;
+    private LineGeneric(T start, T end){
+        setStart(start);
+        setEnd(end);
+    }
+
+    public static <V extends Point> LineGeneric<V> of(V start, V end){
+        return new LineGeneric<>(start, end);
+    }
+
+    public static LineGeneric<Point> of(int x, int y, int x2, int y2){
+        return new LineGeneric<>(new Point(x,y), new Point(x2,y2));
+    }
+
+    public T getStart() {
+        return start;
+    }
+
+    @SuppressWarnings("unchecked")
+    public void setStart(T start) {
+        this.start = (T) start.clone();
+    }
+
+    public T getEnd() {
+        return end;
+    }
+
+    @SuppressWarnings("unchecked")
+    public void setEnd(T end) {
+        this.end = (T) end.clone();
     }
 
     @Override
     public int length(){
-        if(start instanceof Point3D){
-            Point3D tmpStart = (Point3D) start;
-            Point3D tmpEnd = (Point3D) end;
-
-            return (int)Math.sqrt(Math.pow(end.x - start.x,2) + Math.pow(end.y - start.y,2) + Math.pow(tmpEnd.z - tmpStart.z,2));
-        }
-
-        return (int)Math.sqrt(Math.pow(end.x - start.x,2) + Math.pow(end.y - start.y,2));
+        return start.distanceTo(end);
     }
 
     @Override
@@ -43,13 +61,26 @@ public class LineGeneric <T extends Point> implements Lengthable, Polylineable, 
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LineGeneric<T> line = (LineGeneric<T>) o;
-        return Objects.equals(start, line.start) && Objects.equals(end, line.end) ||
-                Objects.equals(end, line.start) && Objects.equals(start, line.end);
+        try {
+            LineGeneric<T> line = (LineGeneric<T>) o;
+
+            return Objects.equals(start, line.start) && Objects.equals(end, line.end) ||
+                    Objects.equals(end, line.start) && Objects.equals(start, line.end);
+        }catch (ClassCastException e){
+            return false;
+        }
     }
 
     @Override
     public int hashCode() {
         return start.hashCode() + end.hashCode();
+    }
+
+    @Override @SneakyThrows
+    public LineGeneric<T> clone() throws CloneNotSupportedException {
+        LineGeneric line = (LineGeneric) super.clone();
+        line.start = start.clone();
+        line.end = end.clone();
+        return line;
     }
 }

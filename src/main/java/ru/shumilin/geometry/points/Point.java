@@ -18,6 +18,10 @@ public class Point implements Comparable<Point>, Cloneable {
         this(point.x, point.y);
     }
 
+    public int distanceTo(Point to){
+        return (int)Math.sqrt(Math.pow(to.x - x,2) + Math.pow(to.y - y,2));
+    }
+
     @Override
     public String toString() {
         return ("{" + x + ";" + y + "}");
