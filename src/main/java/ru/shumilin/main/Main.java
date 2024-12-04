@@ -4,7 +4,9 @@ import ru.shumilin.connection.Connection;
 import ru.shumilin.connection.ConnectionLostException;
 import ru.shumilin.dataStructures.Stack;
 import ru.shumilin.geometry.lines.LineGeneric;
+import ru.shumilin.geometry.points.Point;
 import ru.shumilin.geometry.points.Point3D;
+import ru.shumilin.numbers.Fraction;
 import ru.shumilin.storages.Box;
 import ru.shumilin.storages.Storage;
 import ru.shumilin.university.IllegalMarkException;
@@ -1193,11 +1195,11 @@ public class Main {
 //        System.out.println(students);
 
         //4.2.4 Восстановление студентов
-        System.out.println(convert(
-                List.of("vasya 1 5","petya 1 5","fedor 1 5"),
-                List.of("1 2 3 4","2 3 4 5", "2 3 5 6")
-
-        ));
+//        System.out.println(convert(
+//                List.of("vasya 1 5","petya 1 5","fedor 1 5"),
+//                List.of("1 2 3 4","2 3 4 5", "2 3 5 6")
+//
+//        ));
 
         //6.1.1 Обобщенная коробка
 //        Box<Integer> box = new Box<>();
@@ -1226,6 +1228,46 @@ public class Main {
 //        Stack<Student> studentStack = new Stack<>(10);
 //        studentStack.push(new Student("vasya",new SchoolGraduationSystem(), 1,2,3));
 //        System.out.println(studentStack.peek());
+
+        // 6.2.1 Сдвинуть линию
+//        LineGeneric<Point3D> point3DLineGeneric = LineGeneric.of(new Point3D(1,2,3),
+//                new Point3D(4,5,6));
+//        LineGeneric<Point> pointLineGeneric = LineGeneric.of(-1,2,4,5);
+//
+//        move(point3DLineGeneric);
+//        move(pointLineGeneric);
+//        System.out.println(point3DLineGeneric);
+//        System.out.println(pointLineGeneric);
+
+        // 6.2.2 Поиск максимума
+//        Box<Float> floatBox = new Box<>();
+//        floatBox.setItem(-12.3f);
+//
+//        Box<Fraction> fractionBox = new Box<>();
+//        fractionBox.setItem(new Fraction(1,2));
+//
+//        Box<Integer> integerBox = new Box<>();
+//        integerBox.setItem(-2);
+//
+//        System.out.println(max(List.of(floatBox,
+//                fractionBox,
+//                integerBox)));
+
+        // 6.2.3 Начало отсчета
+//        Box<Point3D> point3DBox = new Box<>();
+//        Box<Point> point2DBox = new Box<>();
+//        start(point3DBox);
+//        start(point2DBox);
+//
+//        System.out.println(point3DBox.getItem());
+//        System.out.println(point2DBox.getItem());
+
+        // 6.2.4 Заполнение списка
+        List<Integer> numbers = new ArrayList<>();
+
+        fillList(numbers);
+
+        System.out.println(numbers);
     }
 
     //--------------------СТАТИЧЕСКИЕ МЕТОДЫ--------------------------
@@ -1341,4 +1383,41 @@ public class Main {
 
         return Storage.of(res);
     }
+
+    //6.2.1 Сдвинуть линию
+    public static void move(LineGeneric<?> line){
+        line.getStart().x += line.getStart().x >= 0 ? 10 : -10;
+    }
+
+    // 6.2.2 Поиск максимума
+    public static double max(List<Box<? extends Number>> boxes) {
+        double max = boxes.getFirst()
+                .getItem().doubleValue();
+
+        for(Box<? extends Number> box : boxes.subList(1, boxes.size())) {
+            Number item = box.getItem();
+            if(item.doubleValue() > max) max = item.doubleValue();
+        }
+
+        return max;
+    }
+
+    // 6.2.3 Начало отсчета
+    public static void start(Box<? super Point3D> box){
+        Random random = new Random();
+        box.setItem(new Point3D(random.nextInt(),
+                random.nextInt(),
+                random.nextInt()));
+    }
+
+    // 6.2.4 Заполнение списка
+    public static void fillList(List<? super Integer> numbers){
+        numbers.clear();
+        for(int i = 1 ; i <= 100; i++) {
+            numbers.add(i);
+        }
+    }
+
+    // 6.3.1 Функция
+
 }
