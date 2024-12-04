@@ -1193,39 +1193,39 @@ public class Main {
 //        System.out.println(students);
 
         //4.2.4 Восстановление студентов
-//        System.out.println(convert(
-//                List.of("vasya university","petya school","fedor school"),
-//                List.of("1 2 3 4","2 3 4 5", "2 3 5 6")
-//
-//        ));
+        System.out.println(convert(
+                List.of("vasya 1 5","petya 1 5","fedor 1 5"),
+                List.of("1 2 3 4","2 3 4 5", "2 3 5 6")
+
+        ));
 
         //6.1.1 Обобщенная коробка
-        Box<Integer> box = new Box<>();
-        box.setItem(3);
-        someBoxMethod(box);
-        System.out.println(box.getItem());
-
-        // 6.1.4 Сравнимый студент
-        Student petya = new Student("petya", new SchoolGraduationSystem(),1,2,3,4);
-        Student vasya = new Student("vasya", new SchoolGraduationSystem(),4,1,2,5);
-
-        System.out.println(vasya.compareTo(petya));
+//        Box<Integer> box = new Box<>();
+//        box.setItem(3);
+//        someBoxMethod(box);
+//        System.out.println(box.getItem());
+//
+//        // 6.1.4 Сравнимый студент
+//        Student petya = new Student("petya", new SchoolGraduationSystem(),1,2,3,4);
+//        Student vasya = new Student("vasya", new SchoolGraduationSystem(),4,1,2,5);
+//
+//        System.out.println(vasya.compareTo(petya));
 
         // 6.1.5 Обощенная линия
 //        LineGeneric<Point3D> line3d = new LineGeneric<Point3D>(new Point3D(1,2,5), new Point3D(3,4,6));
 //        System.out.println(line3d);
 
         // 6.1.6 Стек
-        Stack<String> stringStack = new Stack<>(10);
-        stringStack.push("a");
-        stringStack.push("b");
-        System.out.println(stringStack.peek());
-        System.out.println(stringStack.pop());
-        System.out.println(stringStack.peek());
-
-        Stack<Student> studentStack = new Stack<>(10);
-        studentStack.push(new Student("vasya",new SchoolGraduationSystem(), 1,2,3));
-        System.out.println(studentStack.peek());
+//        Stack<String> stringStack = new Stack<>(10);
+//        stringStack.push("a");
+//        stringStack.push("b");
+//        System.out.println(stringStack.peek());
+//        System.out.println(stringStack.pop());
+//        System.out.println(stringStack.peek());
+//
+//        Stack<Student> studentStack = new Stack<>(10);
+//        studentStack.push(new Student("vasya",new SchoolGraduationSystem(), 1,2,3));
+//        System.out.println(studentStack.peek());
     }
 
     //--------------------СТАТИЧЕСКИЕ МЕТОДЫ--------------------------
@@ -1243,15 +1243,12 @@ public class Main {
     public static void readData(){
         Connection connection = new Connection("ermakov.edu");
 
-        try {
-            for (int i = 0; i < 10; i++) {
-                connection.getData();
+        try (connection) {
+            for (int i = 0; i < 10; i++){
+                if(!connection.isClose()) connection.getData();
             }
         }catch (ConnectionLostException e) {
             throw new RuntimeException(e);
-        }
-        finally {
-            connection.close();
         }
     }
 
@@ -1302,10 +1299,6 @@ public class Main {
 
             String constructorMessage = "Студента " + constructor[0] + " создать невозможно";
 
-            if(constructor.length != 2) {
-                throw new RuntimeException(constructorMessage);
-            }
-
             try {
                 Integer[] add = new Integer[0];
                 if(addArgs != null && !addArgs.isEmpty()) {
@@ -1316,11 +1309,10 @@ public class Main {
 
                 GraduationSystem system;
 
-                switch (constructor[1]) {
-                    case "university" -> system = new UniversityGraduationSystem();
-                    case "school" -> system = new SchoolGraduationSystem();
-                    default -> throw new RuntimeException(constructorMessage);
-                }
+                Integer min = Integer.parseInt(constructor[1]);
+                Integer max = Integer.parseInt(constructor[2]);
+
+                system = new GraduationSystem(min,max) {};
 
                 res.add(new Student(constructor[0], system,
                         add));
@@ -1328,7 +1320,6 @@ public class Main {
                 return convert(constructorArgs, new ArrayList<>());
             }
         }
-
         return res;
     }
 

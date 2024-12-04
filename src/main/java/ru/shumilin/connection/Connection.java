@@ -1,15 +1,21 @@
 package ru.shumilin.connection;
 
+import lombok.Getter;
+
 import java.util.Random;
 
-public class Connection {
+public class Connection implements AutoCloseable{
     String host;
+    @Getter
     boolean isClose;
+
+
 
     public Connection(String host) {
         this.host = host;
     }
 
+    @Override
     public void close(){
         isClose = true;
     }
