@@ -20,6 +20,7 @@ import java.util.List;
 
 import static java.lang.Integer.parseInt;
 import static java.lang.Math.pow;
+import static ru.shumilin.other.DataStream.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -1263,11 +1264,65 @@ public class Main {
 //        System.out.println(point2DBox.getItem());
 
         // 6.2.4 Заполнение списка
-        List<Integer> numbers = new ArrayList<>();
+//        List<Integer> numbers = new ArrayList<>();
+//
+//        fillList(numbers);
+//
+//        System.out.println(numbers);
 
-        fillList(numbers);
+        // 6.3.1 Функция
+        List<String> strings = List.of("qwerty","asdfg","zx");
+        List<Integer> integers = List.of(1,-3,7);
+        List<List<Integer>> listIntegers = List.of(List.of(1,-7,25),
+                List.of(-61,-326,-6),
+                List.of(5,2633,63));
 
-        System.out.println(numbers);
+        List<Integer> lst2 = map(strings, String::length);
+        System.out.println(lst2);
+
+        List<Integer> absValues = map(integers, x -> x >= 0 ? x : x*(-1));
+        System.out.println(absValues);
+
+        List<Integer> maxList = map(listIntegers, list ->{
+            int m = list.getFirst();
+            for(Integer i : list){
+                if(i > m) m = i;
+            }
+
+            return m;
+        });
+
+        System.out.println(maxList);
+
+        //6.3.2 Фильтр
+        List<String> filteredStrings = filter(strings, x -> x.length() < 3);
+        System.out.println(filteredStrings);
+
+        List<Integer> filteredIntegers = filter(integers, x -> x > 0);
+        System.out.println(filteredIntegers);
+
+        List<List<Integer>> negativeList = filter(listIntegers, x -> {
+            for(int i : x){
+                if(i > 0) return false;
+            }
+            return true;
+        });
+
+        for(List<Integer> list : negativeList){
+            System.out.println(list);
+        }
+
+        // 6.3.3 Сокращение
+        String s = collect(strings, (x,y) -> x+y).orElse("всё плохо :(");
+        System.out.println(s);
+
+        Integer sum = collect(integers, Integer::sum).orElse(-251);
+        System.out.println(sum);
+
+        Integer amount = collect(map(listIntegers, List::size), Integer::sum).orElse(251);
+        System.out.println(amount);
+
+        // 6.3.4 Коллекционирование
     }
 
     //--------------------СТАТИЧЕСКИЕ МЕТОДЫ--------------------------
@@ -1417,7 +1472,4 @@ public class Main {
             numbers.add(i);
         }
     }
-
-    // 6.3.1 Функция
-
 }
