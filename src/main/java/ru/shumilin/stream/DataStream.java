@@ -56,6 +56,7 @@ public class DataStream<T> {
             }
         }
 
+        actions.clear();
         if (result == null) return Optional.empty();
         return Optional.of((T)result);
     }
@@ -76,6 +77,7 @@ public class DataStream<T> {
             consumer.accept(res, (T)tmp);
         }
 
+        actions.clear();
         return res;
     }
 }
