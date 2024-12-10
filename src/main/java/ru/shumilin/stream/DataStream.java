@@ -5,7 +5,7 @@ import java.util.function.*;
 
 public class DataStream<T> {
     private final List<T> in;
-    private final List<Action<T>> actions = new ArrayList<>();
+    private final List<Function<T,?>> actions = new ArrayList<>();
 
     public static <T> DataStream<T> of(List<T> lst){
         return new DataStream<>(lst);
@@ -15,43 +15,65 @@ public class DataStream<T> {
         in = lst;
     }
 
+    @SuppressWarnings("unchecked")
     public <R> DataStream<R> map(Function<T,R> function){
-        actions.add(x->map(function));
+        actions.add((x)->map(x,function));
 
-        List<R> res = new ArrayList<>();
-        for(T x : in){
-            res.add(function.apply(x));
-        }
-
-        return of(res);
+        return (DataStream<R>) this;
+    }
+    private <R> R map(T x, Function<T, R> function){
+        return function.apply(x);
     }
 
     public DataStream<T> filter(Predicate<T> predicate){
-        actions.add(x->x.filter(predicate));
+        actions.add(x->filter(x,predicate));
 
-        List<T> res = new ArrayList<>();
-        for(T x : in){
-            if(predicate.test(x)) res.add(x);
-        }
-
-        return of(res);
+        return this;
+    }
+    private T filter(T x,Predicate<T> predicate){
+        return predicate.test(x) ? x:null;
     }
 
+    @SuppressWarnings("unchecked")
     public Optional<T> reduce(BinaryOperator<T> op){
-        if(in.isEmpty()) return Optional.empty();
+        if (actions.isEmpty()) return Optional.empty();
 
-        T res = in.getFirst();
-        for(T x : in.subList(1, in.size())){
-            res = op.apply(res, x);
+        Object result = null;
+        for(T x : in){
+            Object tmp = x;
+
+            for(Function<T,?> action : actions){
+                Function<Object,Object> func = (Function<Object, Object>) action;
+                tmp = func.apply(tmp);
+                if(tmp == null) break;
+            }
+            if(tmp == null) continue;
+
+            if(result == null){
+                result = tmp;
+            }else {
+                result = op.apply((T) result, (T) tmp);
+            }
         }
 
-        return Optional.of(res);
+        if (result == null) return Optional.empty();
+        return Optional.of((T)result);
     }
 
+    @SuppressWarnings("unchecked")
     public <P> P collect(Supplier<P> supplier, BiConsumer<P, T> consumer){
         P res = supplier.get();
         for(T el : in){
-            consumer.accept(res, el);
+            Object tmp = el;
+
+            for(Function<T,?> action : actions){
+                Function<Object,Object> func = (Function<Object, Object>) action;
+                tmp = func.apply(tmp);
+                if(tmp == null) break;
+            }
+            if(tmp == null) continue;
+
+            consumer.accept(res, (T)tmp);
         }
 
         return res;

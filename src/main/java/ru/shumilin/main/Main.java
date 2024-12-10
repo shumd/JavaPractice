@@ -8,6 +8,7 @@ import ru.shumilin.geometry.points.Point;
 import ru.shumilin.geometry.points.Point3D;
 import ru.shumilin.storages.Box;
 import ru.shumilin.storages.Storage;
+import ru.shumilin.stream.DataStream;
 import ru.shumilin.university.IllegalMarkException;
 import ru.shumilin.university.Student;
 import ru.shumilin.university.graduationSystems.GraduationSystem;
@@ -1273,68 +1274,68 @@ public class Main {
         List<List<Integer>> listIntegers = List.of(List.of(1,-7,25),
                 List.of(-61,-326,-6),
                 List.of(5,2633,63));
-
-        List<Integer> lst2 = map(strings, String::length);
-        System.out.println(lst2);
-
-        List<Integer> absValues = map(integers, x -> x >= 0 ? x : x*(-1));
-        System.out.println(absValues);
-
-        List<Integer> maxList = map(listIntegers, list ->{
-            int m = list.getFirst();
-            for(Integer i : list){
-                if(i > m) m = i;
-            }
-
-            return m;
-        });
-
-        System.out.println(maxList);
-
-        //6.3.2 Фильтр
-        List<String> filteredStrings = filter(strings, x -> x.length() < 3);
-        System.out.println(filteredStrings);
-
-        List<Integer> filteredIntegers = filter(integers, x -> x > 0);
-        System.out.println(filteredIntegers);
-
-        List<List<Integer>> negativeList = filter(listIntegers, x -> {
-            for(int i : x){
-                if(i > 0) return false;
-            }
-            return true;
-        });
-
-        for(List<Integer> list : negativeList){
-            System.out.println(list);
-        }
-
-        // 6.3.3 Сокращение
-        String s = reduce(strings, (x, y) -> x+y).orElse("всё плохо :(");
-        System.out.println(s);
-
-        Integer sum = reduce(integers, Integer::sum).orElse(-251);
-        System.out.println(sum);
-
-        Integer amount = reduce(map(listIntegers, List::size), Integer::sum).orElse(-1);
-        System.out.println(amount);
-
-        // 6.3.4 Коллекционирование
-        List<List<Integer>> positiveAndNegative = collect(integers,
-                () -> List.of(new ArrayList<>(), new ArrayList<>()),
-                (lst, value) -> {
-            if(value >= 0) lst.getFirst().add(value);
-            else lst.get(1).add(value);
-        });
-
-        System.out.println(positiveAndNegative);
-
-        Map<Integer, List<String>> sameLengthLists = collect(strings, HashMap::new,
-                (map,x)->{
-            if(!map.containsKey(x.length())){
-                map.put(x.length(),new ArrayList<>());
-            }
-            map.get(x.length()).add(x);});
+//
+//        List<Integer> lst2 = map(strings, String::length);
+//        System.out.println(lst2);
+//
+//        List<Integer> absValues = map(integers, x -> x >= 0 ? x : x*(-1));
+//        System.out.println(absValues);
+//
+//        List<Integer> maxList = map(listIntegers, list ->{
+//            int m = list.getFirst();
+//            for(Integer i : list){
+//                if(i > m) m = i;
+//            }
+//
+//            return m;
+//        });
+//
+//        System.out.println(maxList);
+//
+//        //6.3.2 Фильтр
+//        List<String> filteredStrings = filter(strings, x -> x.length() < 3);
+//        System.out.println(filteredStrings);
+//
+//        List<Integer> filteredIntegers = filter(integers, x -> x > 0);
+//        System.out.println(filteredIntegers);
+//
+//        List<List<Integer>> negativeList = filter(listIntegers, x -> {
+//            for(int i : x){
+//                if(i > 0) return false;
+//            }
+//            return true;
+//        });
+//
+//        for(List<Integer> list : negativeList){
+//            System.out.println(list);
+//        }
+//
+//        // 6.3.3 Сокращение
+//        String s = reduce(strings, (x, y) -> x+y).orElse("всё плохо :(");
+//        System.out.println(s);
+//
+//        Integer sum = reduce(integers, Integer::sum).orElse(-251);
+//        System.out.println(sum);
+//
+//        Integer amount = reduce(map(listIntegers, List::size), Integer::sum).orElse(-1);
+//        System.out.println(amount);
+//
+//        // 6.3.4 Коллекционирование
+//        List<List<Integer>> positiveAndNegative = collect(integers,
+//                () -> List.of(new ArrayList<>(), new ArrayList<>()),
+//                (lst, value) -> {
+//            if(value >= 0) lst.getFirst().add(value);
+//            else lst.get(1).add(value);
+//        });
+//
+//        System.out.println(positiveAndNegative);
+//
+//        Map<Integer, List<String>> sameLengthLists = collect(strings, HashMap::new,
+//                (map,x)->{
+//            if(!map.containsKey(x.length())){
+//                map.put(x.length(),new ArrayList<>());
+//            }
+//            map.get(x.length()).add(x);});
 
         //point положительные на -7х и собираем polyline
         List<Point> points = List.of(new Point(1,2),
@@ -1342,12 +1343,26 @@ public class Main {
                 new Point(4,5),
                 new Point(4,-7));
 
-        List<Point> filtered = filter(points, (p) -> p.x >= 0 && p.y >= 0);
-        List<Point> pointsChanged = map(filtered,
-                (point)-> new Point(point.x-7,point.y));
+//        List<Point> filtered = filter(points, (p) -> p.x >= 0 && p.y >= 0);
+//        List<Point> pointsChanged = map(filtered,
+//                (point)-> new Point(point.x-7,point.y));
+//
+//        Polyline polyline = collect(pointsChanged,Polyline::new, Polyline::add);
+//        System.out.println(polyline);
 
-        Polyline polyline = collect(pointsChanged,Polyline::new, Polyline::add);
+        Polyline polyline = DataStream.of(points)
+                        .filter(p -> p.x >= 0 && p.y >= 0)
+                        .map(p -> new Point(p.x-7,p.y))
+                        .collect(Polyline::new,Polyline::add);
         System.out.println(polyline);
+
+        System.out.println(
+                DataStream.of(strings)
+                        .filter(x->x.length()>2)
+                        .map(String::length)
+                        .reduce((x,y)->x+y)
+                        .orElse(-123)
+        );
     }
 
     //--------------------СТАТИЧЕСКИЕ МЕТОДЫ--------------------------
