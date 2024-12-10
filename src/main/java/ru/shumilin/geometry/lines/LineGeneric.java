@@ -1,27 +1,24 @@
 package ru.shumilin.geometry.lines;
 
-import lombok.Getter;
-import lombok.Setter;
 import lombok.SneakyThrows;
 import ru.shumilin.geometry.points.Point;
-import ru.shumilin.geometry.points.Point3D;
 
 import java.util.Objects;
 
 public class LineGeneric <T extends Point> implements Lengthable, Polylineable, Cloneable {
     private T start, end;
 
-    private LineGeneric(T start, T end){
+    private LineGeneric(T start, T end) {
         setStart(start);
         setEnd(end);
     }
 
-    public static <V extends Point> LineGeneric<V> of(V start, V end){
+    public static <V extends Point> LineGeneric<V> of(V start, V end) {
         return new LineGeneric<>(start, end);
     }
 
-    public static LineGeneric<Point> of(int x, int y, int x2, int y2){
-        return new LineGeneric<>(new Point(x,y), new Point(x2,y2));
+    public static LineGeneric<Point> of(int x, int y, int x2, int y2) {
+        return new LineGeneric<>(new Point(x, y), new Point(x2, y2));
     }
 
     public T getStart() {
@@ -43,7 +40,7 @@ public class LineGeneric <T extends Point> implements Lengthable, Polylineable, 
     }
 
     @Override
-    public int length(){
+    public int length() {
         return start.distanceTo(end);
     }
 
@@ -57,7 +54,9 @@ public class LineGeneric <T extends Point> implements Lengthable, Polylineable, 
         return "Линия от " + start + " до " + end;
     }
 
+
     @Override
+    @SuppressWarnings("unchecked")
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -66,7 +65,7 @@ public class LineGeneric <T extends Point> implements Lengthable, Polylineable, 
 
             return Objects.equals(start, line.start) && Objects.equals(end, line.end) ||
                     Objects.equals(end, line.start) && Objects.equals(start, line.end);
-        }catch (ClassCastException e){
+        } catch (ClassCastException e) {
             return false;
         }
     }
@@ -76,8 +75,9 @@ public class LineGeneric <T extends Point> implements Lengthable, Polylineable, 
         return start.hashCode() + end.hashCode();
     }
 
-    @Override @SneakyThrows
-    public LineGeneric<T> clone() throws CloneNotSupportedException {
+    @Override
+    @SneakyThrows
+    public LineGeneric clone() {
         LineGeneric line = (LineGeneric) super.clone();
         line.start = start.clone();
         line.end = end.clone();

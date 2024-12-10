@@ -1,9 +1,9 @@
 package ru.shumilin.numbers;
 
-import lombok.EqualsAndHashCode;
 import lombok.SneakyThrows;
 
-@EqualsAndHashCode(callSuper = false)
+import java.util.Objects;
+
 public final class Fraction extends Number implements Cloneable {
     private final int numerator;
     private final int denominator;
@@ -133,8 +133,25 @@ public final class Fraction extends Number implements Cloneable {
         return numerator + "/" + denominator;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Fraction fraction = (Fraction) o;
+        return numerator / denominator  == fraction.numerator/fraction.denominator;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numerator/denominator);
+    }
+
     @Override @SneakyThrows
     public Fraction clone(){
         return (Fraction) super.clone();
+    }
+
+    public static class FractionPool{
+
     }
 }

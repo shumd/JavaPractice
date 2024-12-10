@@ -2,25 +2,22 @@ package ru.shumilin.main;
 
 import ru.shumilin.connection.Connection;
 import ru.shumilin.connection.ConnectionLostException;
-import ru.shumilin.dataStructures.Stack;
 import ru.shumilin.geometry.lines.LineGeneric;
+import ru.shumilin.geometry.lines.Polyline;
 import ru.shumilin.geometry.points.Point;
 import ru.shumilin.geometry.points.Point3D;
-import ru.shumilin.numbers.Fraction;
 import ru.shumilin.storages.Box;
 import ru.shumilin.storages.Storage;
 import ru.shumilin.university.IllegalMarkException;
 import ru.shumilin.university.Student;
 import ru.shumilin.university.graduationSystems.GraduationSystem;
-import ru.shumilin.university.graduationSystems.SchoolGraduationSystem;
-import ru.shumilin.university.graduationSystems.UniversityGraduationSystem;
 
 import java.util.*;
 import java.util.List;
 
 import static java.lang.Integer.parseInt;
 import static java.lang.Math.pow;
-import static ru.shumilin.other.DataStream.*;
+import static ru.shumilin.stream.DataStream.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -1313,16 +1310,44 @@ public class Main {
         }
 
         // 6.3.3 Сокращение
-        String s = collect(strings, (x,y) -> x+y).orElse("всё плохо :(");
+        String s = reduce(strings, (x, y) -> x+y).orElse("всё плохо :(");
         System.out.println(s);
 
-        Integer sum = collect(integers, Integer::sum).orElse(-251);
+        Integer sum = reduce(integers, Integer::sum).orElse(-251);
         System.out.println(sum);
 
-        Integer amount = collect(map(listIntegers, List::size), Integer::sum).orElse(251);
+        Integer amount = reduce(map(listIntegers, List::size), Integer::sum).orElse(-1);
         System.out.println(amount);
 
         // 6.3.4 Коллекционирование
+        List<List<Integer>> positiveAndNegative = collect(integers,
+                () -> List.of(new ArrayList<>(), new ArrayList<>()),
+                (lst, value) -> {
+            if(value >= 0) lst.getFirst().add(value);
+            else lst.get(1).add(value);
+        });
+
+        System.out.println(positiveAndNegative);
+
+        Map<Integer, List<String>> sameLengthLists = collect(strings, HashMap::new,
+                (map,x)->{
+            if(!map.containsKey(x.length())){
+                map.put(x.length(),new ArrayList<>());
+            }
+            map.get(x.length()).add(x);});
+
+        //point положительные на -7х и собираем polyline
+        List<Point> points = List.of(new Point(1,2),
+                new Point(-2,5),
+                new Point(4,5),
+                new Point(4,-7));
+
+        List<Point> filtered = filter(points, (p) -> p.x >= 0 && p.y >= 0);
+        List<Point> pointsChanged = map(filtered,
+                (point)-> new Point(point.x-7,point.y));
+
+        Polyline polyline = collect(pointsChanged,Polyline::new, Polyline::add);
+        System.out.println(polyline);
     }
 
     //--------------------СТАТИЧЕСКИЕ МЕТОДЫ--------------------------
@@ -1472,4 +1497,6 @@ public class Main {
             numbers.add(i);
         }
     }
+
+    // 7.1 | 7.2
 }
