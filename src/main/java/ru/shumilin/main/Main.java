@@ -1,14 +1,14 @@
 package ru.shumilin.main;
 
+import ru.shumilin.animals.cats.Meowable;
+import ru.shumilin.animals.dogs.Dog;
+import ru.shumilin.animals.dogs.adapters.MeowableDog;
 import ru.shumilin.connection.Connection;
 import ru.shumilin.connection.ConnectionLostException;
 import ru.shumilin.geometry.lines.LineGeneric;
-import ru.shumilin.geometry.lines.Polyline;
-import ru.shumilin.geometry.points.Point;
 import ru.shumilin.geometry.points.Point3D;
 import ru.shumilin.storages.Box;
 import ru.shumilin.storages.Storage;
-import ru.shumilin.stream.DataStream;
 import ru.shumilin.university.IllegalMarkException;
 import ru.shumilin.university.Student;
 import ru.shumilin.university.graduationSystems.GraduationSystem;
@@ -18,7 +18,6 @@ import java.util.List;
 
 import static java.lang.Integer.parseInt;
 import static java.lang.Math.pow;
-import static ru.shumilin.stream.DataStream.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -1269,11 +1268,11 @@ public class Main {
 //        System.out.println(numbers);
 
         // 6.3.1 Функция
-        List<String> strings = List.of("qwerty","asdfg","zx");
-        List<Integer> integers = List.of(1,-3,7);
-        List<List<Integer>> listIntegers = List.of(List.of(1,-7,25),
-                List.of(-61,-326,-6),
-                List.of(5,2633,63));
+//        List<String> strings = List.of("qwerty","asdfg","zx");
+//        List<Integer> integers = List.of(1,-3,7);
+//        List<List<Integer>> listIntegers = List.of(List.of(1,-7,25),
+//                List.of(-61,-326,-6),
+//                List.of(5,2633,63));
 //
 //        List<Integer> lst2 = map(strings, String::length);
 //        System.out.println(lst2);
@@ -1338,10 +1337,10 @@ public class Main {
 //            map.get(x.length()).add(x);});
 
         //point положительные на -7х и собираем polyline
-        List<Point> points = List.of(new Point(1,2),
-                new Point(-2,5),
-                new Point(4,5),
-                new Point(4,-7));
+//        List<Point> points = List.of(new Point(1,2),
+//                new Point(-2,5),
+//                new Point(4,5),
+//                new Point(4,-7));
 
 //        List<Point> filtered = filter(points, (p) -> p.x >= 0 && p.y >= 0);
 //        List<Point> pointsChanged = map(filtered,
@@ -1350,19 +1349,40 @@ public class Main {
 //        Polyline polyline = collect(pointsChanged,Polyline::new, Polyline::add);
 //        System.out.println(polyline);
 
-        Polyline polyline = DataStream.of(points)
-                        .filter(p -> p.x >= 0 && p.y >= 0)
-                        .map(p -> new Point(p.x-7,p.y))
-                        .collect(Polyline::new,Polyline::add);
-        System.out.println(polyline);
+//        Polyline polyline = DataStream.of(points)
+//                        .filter(p -> p.x >= 0 && p.y >= 0)
+//                        .map(p -> new Point(p.x-7,p.y))
+//                        .collect(Polyline::new,Polyline::add);
+//        System.out.println(polyline);
 
-        System.out.println(
-                DataStream.of(strings)
-                        .filter(x->x.length()>2)
-                        .map(String::length)
-                        .reduce((x,y)->x+y)
-                        .orElse(-123)
-        );
+//        System.out.println(
+//                DataStream.of(strings)
+//                        .filter(x->x.length()>2)
+//                        .map(String::length)
+//                        .reduce((x,y)->x+y)
+//                        .orElse(-123)
+//        );
+
+//        Cat vasya = new Cat("vasya");
+//        MeowCounter meowCounter = new MeowCounter(vasya);
+//
+//        testMeowable(meowCounter);
+//        System.out.println(meowCounter.getCounter());
+//
+//        AttentionMeow attentionMeow = new AttentionMeow(meowCounter);
+//
+//        testMeowable(attentionMeow);
+//
+//        MeowCounter meowCounter1 = new MeowCounter(attentionMeow);
+//        testMeowable(meowCounter1);
+//        System.out.println(meowCounter1.getCounter());
+
+//        Dog palkan = new Dog("Polkan");
+//        MeowableDog meowableDog = new MeowableDog(palkan);
+//        testMeowable(meowableDog);
+
+        //светофор
+        
     }
 
     //--------------------СТАТИЧЕСКИЕ МЕТОДЫ--------------------------
@@ -1513,5 +1533,10 @@ public class Main {
         }
     }
 
+    public static void testMeowable(Meowable m){
+        m.meow();
+        m.meow();
+        m.meow();
+    }
     // 7.1 | 7.2
 }
