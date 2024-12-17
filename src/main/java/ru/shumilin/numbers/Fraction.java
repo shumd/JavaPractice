@@ -2,13 +2,20 @@ package ru.shumilin.numbers;
 
 import lombok.SneakyThrows;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public final class Fraction extends Number implements Cloneable {
     private final int numerator;
     private final int denominator;
 
-    public Fraction(int numerator, int denominator){
+    public static Fraction of(int numerator, int denominator) {
+        return FractionPool.init(numerator, denominator);
+    }
+
+    private Fraction(int numerator, int denominator){
         if(denominator <= 0){
             throw new IllegalArgumentException("Denominator must be > 0");
         }
@@ -17,7 +24,7 @@ public final class Fraction extends Number implements Cloneable {
         this.denominator = denominator;
     }
 
-    public Fraction(Fraction fraction){
+    private Fraction(Fraction fraction){
         this(fraction.numerator, fraction.denominator);
     }
 
@@ -152,6 +159,22 @@ public final class Fraction extends Number implements Cloneable {
     }
 
     public static class FractionPool{
+        private final static Map<List<Integer>, Fraction> POOL = new HashMap<>();
 
+        public static Fraction init(int numerator, int denominator){
+            if(POOL.containsKey(List.of(numerator,denominator))){
+                return POOL.get(List.of(numerator,denominator));
+            }else {
+                Fraction tmp = new Fraction(numerator,denominator);
+                POOL.put(List.of(numerator,denominator), tmp);
+                return tmp;
+            }
+        }
+    }
+
+    public static class FractionFactory{
+        public static Fraction createFraction(int numerator, int denominator){
+            return FractionPool.init(numerator,denominator);
+        }
     }
 }

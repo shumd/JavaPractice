@@ -6,10 +6,17 @@ import ru.shumilin.animals.dogs.adapters.MeowableDog;
 import ru.shumilin.cities.traficLights.TrafficLight;
 import ru.shumilin.connection.Connection;
 import ru.shumilin.connection.ConnectionLostException;
+import ru.shumilin.geometry.lines.LengthSummator;
+import ru.shumilin.geometry.lines.Line;
 import ru.shumilin.geometry.lines.LineGeneric;
 import ru.shumilin.geometry.points.Point3D;
+import ru.shumilin.numbers.Fraction;
+import ru.shumilin.other.IntStr;
+import ru.shumilin.other.Summator;
+import ru.shumilin.other.Temperature;
 import ru.shumilin.storages.Box;
 import ru.shumilin.storages.Storage;
+import ru.shumilin.stream.DataStream;
 import ru.shumilin.university.IllegalMarkException;
 import ru.shumilin.university.Student;
 import ru.shumilin.university.graduationSystems.GraduationSystem;
@@ -1382,13 +1389,44 @@ public class Main {
 //        MeowableDog meowableDog = new MeowableDog(palkan);
 //        testMeowable(meowableDog);
 
-        //светофор
-        TrafficLight trafficLight = new TrafficLight();
+//        //светофор
+//        TrafficLight trafficLight = new TrafficLight();
+//
+//        for(int i = 0; i < 10; i++){
+//            trafficLight.next();
+//        }
 
-        for(int i = 0; i < 10; i++){
-            trafficLight.next();
-        }
-        
+        // 7.1.1 Без конструктора
+//        Storage<Integer> nullableStorage = Storage.ofNullable(null);
+//        Storage<Integer> storage = Storage.of(null);
+
+        // 7.1 дроби
+//        Fraction f1 = Fraction.of(1,2);
+//        Fraction f2 = Fraction.of(1,2);
+//        Fraction f3 = Fraction.FractionFactory.createFraction(1,2);
+//
+//        System.out.println(f1 == f2);
+//        System.out.println(f1 == f3);
+
+        // 7.1.5 температуры
+//        System.out.println(Temperature.LOW);
+
+        // 7.1.6
+//        Storage<Integer> storage = count();
+//        System.out.println("Count ничего не выводит");
+//        System.out.println(storage.getObject(-1));
+
+        // 7.2.1
+//        IntStr intStr = new IntStr("asdfg");
+//        Summator summator = new Summator();
+//        System.out.println(summator.sum(intStr,123));
+
+        // 7.2.2
+        String str = "sadf";
+
+        System.out.println(LengthSummator.sum(str::length,new Line(2,3,4,5)));
+
+        //
     }
 
     //--------------------СТАТИЧЕСКИЕ МЕТОДЫ--------------------------
@@ -1502,7 +1540,7 @@ public class Main {
             res += num;
         }
 
-        return Storage.of(res);
+        return Storage.ofNullable(res);
     }
 
     //6.2.1 Сдвинуть линию
@@ -1544,5 +1582,8 @@ public class Main {
         m.meow();
         m.meow();
     }
-    // 7.1 | 7.2
+
+    public static Storage<Integer> count(){
+        return Storage.of(()-> {System.out.println("count num"); return 5;});
+    }
 }
