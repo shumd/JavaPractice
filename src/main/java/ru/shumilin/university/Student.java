@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Getter
 public class Student implements Comparable<Student> {
     private GraduationSystem graduationSystem;
-    @Getter
     private String name;
     private List<Integer> marks = new ArrayList<>();
 
@@ -50,6 +50,15 @@ public class Student implements Comparable<Student> {
         marks.remove(index);
     }
 
+    public StudentSave save(){
+        return new StudentSave(this);
+    }
+
+    public void load(StudentSave save){
+        name = save.getName();
+        graduationSystem = save.getGraduationSystem();
+        marks = save.getMarks();
+    }
 
     public double averageMark(){
         if(marks.isEmpty()) return 0;

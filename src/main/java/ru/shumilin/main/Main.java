@@ -4,6 +4,7 @@ import ru.shumilin.animals.cats.Meowable;
 import ru.shumilin.animals.dogs.Dog;
 import ru.shumilin.animals.dogs.adapters.MeowableDog;
 import ru.shumilin.cities.traficLights.TrafficLight;
+import ru.shumilin.cities.traficLights.TrafficLightClass;
 import ru.shumilin.connection.Connection;
 import ru.shumilin.connection.ConnectionLostException;
 import ru.shumilin.geometry.lines.LineGeneric;
@@ -1383,12 +1384,20 @@ public class Main {
 //        testMeowable(meowableDog);
 
         //светофор
-        TrafficLight trafficLight = new TrafficLight();
+//        TrafficLight trafficLight = new TrafficLight();
+//
+//        for(int i = 0; i < 10; i++){
+//            trafficLight.next();
+//        }
+
+        TrafficLightClass trafficLightClass = new TrafficLightClass();
 
         for(int i = 0; i < 10; i++){
-            trafficLight.next();
+            trafficLightClass.next();
         }
-        
+
+        // акции и сохранение студента
+
     }
 
     //--------------------СТАТИЧЕСКИЕ МЕТОДЫ--------------------------
