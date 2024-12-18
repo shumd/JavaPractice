@@ -6,6 +6,9 @@ import ru.shumilin.animals.dogs.adapters.MeowableDog;
 import ru.shumilin.cities.traficLights.TrafficLight;
 import ru.shumilin.connection.Connection;
 import ru.shumilin.connection.ConnectionLostException;
+import ru.shumilin.exchange.Bot;
+import ru.shumilin.exchange.Printer;
+import ru.shumilin.exchange.Share;
 import ru.shumilin.geometry.lines.LengthSummator;
 import ru.shumilin.geometry.lines.Line;
 import ru.shumilin.geometry.lines.LineGeneric;
@@ -19,7 +22,9 @@ import ru.shumilin.storages.Storage;
 import ru.shumilin.stream.DataStream;
 import ru.shumilin.university.IllegalMarkException;
 import ru.shumilin.university.Student;
+import ru.shumilin.university.StudentSave;
 import ru.shumilin.university.graduationSystems.GraduationSystem;
+import ru.shumilin.university.graduationSystems.SchoolGraduationSystem;
 
 import java.util.*;
 import java.util.List;
@@ -1421,12 +1426,29 @@ public class Main {
 //        Summator summator = new Summator();
 //        System.out.println(summator.sum(intStr,123));
 
-        // 7.2.2
-        String str = "sadf";
+        // сохранение и загрузка
+//        Student vasya = new Student("Vasya", new SchoolGraduationSystem(),1,2,3);
+//        StudentSave save = new StudentSave(vasya);
+//        vasya.addMarks(5,5,5,5);
+//        System.out.println(vasya);
+//        vasya = save.load();
+//        System.out.println(vasya);
 
-        System.out.println(LengthSummator.sum(str::length,new Line(2,3,4,5)));
+        // Курс акций
+        Share orcl = new Share("ORCL", 75);
+        Share TSLA = new Share("TSLA", 696);
 
-        //
+        Printer printer = Printer.of(orcl, TSLA);
+        Bot botOrcl = Bot.of(orcl, 70);
+
+        Random rand = new Random();
+        while(orcl.getPrice() != 65){
+            TSLA.setPrice(rand.nextInt(30000));
+            orcl.setPrice(orcl.getPrice() -1);
+
+            System.out.println();
+        }
+
     }
 
     //--------------------СТАТИЧЕСКИЕ МЕТОДЫ--------------------------

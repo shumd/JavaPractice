@@ -6,8 +6,8 @@ import ru.shumilin.university.graduationSystems.GraduationSystem;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
 public class StudentSave {
+    @Getter
     private final String name;
     private final GraduationSystem graduationSystem;
     private final List<Integer> marks;
@@ -16,5 +16,9 @@ public class StudentSave {
         name = student.getName();
         graduationSystem = student.getGraduationSystem();
         marks = new ArrayList<>(student.getMarks());
+    }
+
+    public Student load(){
+        return new Student(name, graduationSystem, marks.toArray(new Integer[0]));
     }
 }

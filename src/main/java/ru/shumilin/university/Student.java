@@ -54,12 +54,6 @@ public class Student implements Comparable<Student> {
         return new StudentSave(this);
     }
 
-    public void load(StudentSave save){
-        name = save.getName();
-        graduationSystem = save.getGraduationSystem();
-        marks = save.getMarks();
-    }
-
     public double averageMark(){
         if(marks.isEmpty()) return 0;
 
