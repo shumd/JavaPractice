@@ -15,6 +15,12 @@ public class SquareInheritance extends Rectangle implements Polylineable {
     }
 
     @Override
+    public double area() {
+        System.out.println("calculating");
+        return super.area();
+    }
+
+    @Override
     protected boolean isIncorrect() {
         return width()!=height();
     }

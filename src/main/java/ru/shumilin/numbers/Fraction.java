@@ -52,7 +52,12 @@ public final class Fraction extends Number implements Cloneable {
 
         int biggest;
         int smallest;
-        if(num1>num2){
+        if(num1>num2){Fraction f1 = Fraction.of(1,2);
+//        Fraction f2 = Fraction.of(1,2);
+//        Fraction f3 = Fraction.FractionFactory.createFraction(1,2);
+//
+//        System.out.println(f1 == f2);
+//        System.out.println(f1 == f3);
             biggest = num1;
             smallest = num2;
         }else {
@@ -159,20 +164,22 @@ public final class Fraction extends Number implements Cloneable {
     }
 
     public static class FractionPool{
-        private final static Map<List<Integer>, Fraction> POOL = new HashMap<>();
+        private FractionPool(){}
+        private final static Map<String, Fraction> POOL = new HashMap<>();
 
         public static Fraction init(int numerator, int denominator){
-            if(POOL.containsKey(List.of(numerator,denominator))){
-                return POOL.get(List.of(numerator,denominator));
+            if(POOL.containsKey(numerator + " " + denominator)){
+                return POOL.get(numerator + " " + denominator);
             }else {
                 Fraction tmp = new Fraction(numerator,denominator);
-                POOL.put(List.of(numerator,denominator), tmp);
+                POOL.put(numerator + " " + denominator, tmp);
                 return tmp;
             }
         }
     }
 
     public static class FractionFactory{
+        private FractionFactory(){}
         public static Fraction createFraction(int numerator, int denominator){
             return FractionPool.init(numerator,denominator);
         }

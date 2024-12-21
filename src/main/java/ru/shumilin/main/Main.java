@@ -12,7 +12,10 @@ import ru.shumilin.exchange.Share;
 import ru.shumilin.geometry.lines.LengthSummator;
 import ru.shumilin.geometry.lines.Line;
 import ru.shumilin.geometry.lines.LineGeneric;
+import ru.shumilin.geometry.points.Point;
 import ru.shumilin.geometry.points.Point3D;
+import ru.shumilin.geometry.rectangles.SquareInheritance;
+import ru.shumilin.geometry.rectangles.SquareWithAreaCache;
 import ru.shumilin.numbers.Fraction;
 import ru.shumilin.other.IntStr;
 import ru.shumilin.other.Summator;
@@ -1435,20 +1438,30 @@ public class Main {
 //        System.out.println(vasya);
 
         // Курс акций
-        Share orcl = new Share("ORCL", 75);
-        Share TSLA = new Share("TSLA", 696);
+//        Share orcl = new Share("ORCL", 75);
+//        Share TSLA = new Share("TSLA", 696);
+//
+//        Printer printer = Printer.of(orcl, TSLA);
+//        Bot botOrcl = Bot.of(orcl, 70);
+//
+//        Random rand = new Random();
+//        while(orcl.getPrice() != 65){
+//            TSLA.setPrice(rand.nextInt(30000));
+//            orcl.setPrice(orcl.getPrice() -1);
+//
+//            System.out.println();
+//        }
 
-        Printer printer = Printer.of(orcl, TSLA);
-        Bot botOrcl = Bot.of(orcl, 70);
+        SquareInheritance squareInheritance = new SquareInheritance(new Point(10,10),5);
+        squareInheritance = new SquareWithAreaCache(squareInheritance);
 
-        Random rand = new Random();
-        while(orcl.getPrice() != 65){
-            TSLA.setPrice(rand.nextInt(30000));
-            orcl.setPrice(orcl.getPrice() -1);
+        System.out.println(squareInheritance.area());
+        System.out.println(squareInheritance.area());
 
-            System.out.println();
-        }
+        squareInheritance.setBottomRightCorner(new Point(20, 0));
 
+        System.out.println(squareInheritance.area());
+        System.out.println(squareInheritance.area());
     }
 
     //--------------------СТАТИЧЕСКИЕ МЕТОДЫ--------------------------
