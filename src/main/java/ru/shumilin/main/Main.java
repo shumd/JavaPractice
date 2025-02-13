@@ -1452,16 +1452,18 @@ public class Main {
 //            System.out.println();
 //        }
 
-        SquareInheritance squareInheritance = new SquareInheritance(new Point(10,10),5);
-        squareInheritance = new SquareWithAreaCache(squareInheritance);
+//        SquareInheritance squareInheritance = new SquareInheritance(new Point(10,10),5);
+//        squareInheritance = new SquareWithAreaCache(squareInheritance);
+//
+//        System.out.println(squareInheritance.area());
+//        System.out.println(squareInheritance.area());
+//
+//        squareInheritance.setBottomRightCorner(new Point(20, 0));
+//
+//        System.out.println(squareInheritance.area());
+//        System.out.println(squareInheritance.area());
 
-        System.out.println(squareInheritance.area());
-        System.out.println(squareInheritance.area());
-
-        squareInheritance.setBottomRightCorner(new Point(20, 0));
-
-        System.out.println(squareInheritance.area());
-        System.out.println(squareInheritance.area());
+        System.out.println(symbolCounter(List.of("hello", "world!", "No"), "o"));
     }
 
     //--------------------СТАТИЧЕСКИЕ МЕТОДЫ--------------------------
@@ -1621,4 +1623,22 @@ public class Main {
     public static Storage<Integer> count(){
         return Storage.of(()-> {System.out.println("count num"); return 5;});
     }
+
+    public static int symbolCounter(List<String> str, String symbol){
+        return str.stream()
+                .filter(x -> x.contains(symbol))
+                .map(String::toCharArray)
+                .map(x -> {
+                    int counter = 0;
+                    for(char c : x){
+                        if(c == symbol.charAt(0)){
+                            counter++;
+                        }
+                    }
+                    return counter;
+                })
+                .reduce(Integer::sum)
+                .orElse(-1);
+    }
+
 }
