@@ -1,5 +1,6 @@
 package ru.shumilin.main;
 
+import lombok.SneakyThrows;
 import ru.shumilin.animals.cats.Meowable;
 import ru.shumilin.animals.dogs.Dog;
 import ru.shumilin.animals.dogs.adapters.MeowableDog;
@@ -12,6 +13,7 @@ import ru.shumilin.exchange.Share;
 import ru.shumilin.geometry.lines.LengthSummator;
 import ru.shumilin.geometry.lines.Line;
 import ru.shumilin.geometry.lines.LineGeneric;
+import ru.shumilin.geometry.lines.Polyline;
 import ru.shumilin.geometry.points.Point;
 import ru.shumilin.geometry.points.Point3D;
 import ru.shumilin.geometry.rectangles.SquareInheritance;
@@ -29,8 +31,12 @@ import ru.shumilin.university.StudentSave;
 import ru.shumilin.university.graduationSystems.GraduationSystem;
 import ru.shumilin.university.graduationSystems.SchoolGraduationSystem;
 
+import java.io.File;
 import java.util.*;
 import java.util.List;
+import java.util.function.Supplier;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static java.lang.Integer.parseInt;
 import static java.lang.Math.pow;
@@ -1463,7 +1469,9 @@ public class Main {
 //        System.out.println(squareInheritance.area());
 //        System.out.println(squareInheritance.area());
 
-        System.out.println(symbolCounter(List.of("hello", "world!", "No"), "o"));
+//        System.out.println(symbolCounter(List.of("hello", "world!", "No"), "o"));
+
+
     }
 
     //--------------------СТАТИЧЕСКИЕ МЕТОДЫ--------------------------
@@ -1624,21 +1632,39 @@ public class Main {
         return Storage.of(()-> {System.out.println("count num"); return 5;});
     }
 
-    public static int symbolCounter(List<String> str, String symbol){
-        return str.stream()
-                .filter(x -> x.contains(symbol))
-                .map(String::toCharArray)
-                .map(x -> {
-                    int counter = 0;
-                    for(char c : x){
-                        if(c == symbol.charAt(0)){
-                            counter++;
-                        }
-                    }
-                    return counter;
-                })
-                .reduce(Integer::sum)
-                .orElse(-1);
+//    public static int symbolCounter(List<String> str, String symbol){
+//        return str.stream()
+//                .filter(x -> x.contains(symbol))
+//                .map(String::toCharArray)
+//                .map(x -> {
+//                    int counter = 0;
+//                    for(char c : x){
+//                        if(c == symbol.charAt(0)){
+//                            counter++;
+//                        }
+//                    }
+//                    return counter;
+//                })
+//                .reduce(Integer::sum)
+//                .orElse(-1);
+//    }
+
+    public static Polyline toPolyline(List<Point> points){
+        return points.stream()
+                .distinct()
+                .sorted(Comparator.comparingInt(x -> x.x))
+                .map(x -> new Point(x.x, Math.abs(x.y)))
+                .collect(Polyline::new,
+                        Polyline::add,
+                        (x,y) -> x.add(y.getPoints()));
     }
 
+    //Если равны y объединяем в Polyline и то же самое что и в toPolyline
+    @SneakyThrows
+    public static List<Polyline> toPolylineFromFile(File file){
+        Scanner scanner = new Scanner(file);
+         Stream.generate(scanner::nextLine).
+                map(String::strip)
+                 .map(new )
+    }
 }
