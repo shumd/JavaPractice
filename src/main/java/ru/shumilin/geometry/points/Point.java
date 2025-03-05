@@ -2,8 +2,9 @@ package ru.shumilin.geometry.points;
 
 import lombok.EqualsAndHashCode;
 import lombok.SneakyThrows;
+import lombok.ToString;
 
-
+@ToString
 @EqualsAndHashCode()
 public class Point implements Comparable<Point>, Cloneable {
     public int x;

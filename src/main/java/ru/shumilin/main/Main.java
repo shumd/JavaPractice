@@ -2,41 +2,38 @@ package ru.shumilin.main;
 
 import lombok.SneakyThrows;
 import ru.shumilin.animals.cats.Meowable;
-import ru.shumilin.animals.dogs.Dog;
-import ru.shumilin.animals.dogs.adapters.MeowableDog;
-import ru.shumilin.cities.traficLights.TrafficLight;
+import ru.shumilin.cache.CacheProxyCreator;
+import ru.shumilin.cache.Summer;
+import ru.shumilin.cache.Summerable;
 import ru.shumilin.connection.Connection;
 import ru.shumilin.connection.ConnectionLostException;
-import ru.shumilin.exchange.Bot;
-import ru.shumilin.exchange.Printer;
-import ru.shumilin.exchange.Share;
-import ru.shumilin.geometry.lines.LengthSummator;
 import ru.shumilin.geometry.lines.Line;
 import ru.shumilin.geometry.lines.LineGeneric;
 import ru.shumilin.geometry.lines.Polyline;
 import ru.shumilin.geometry.points.Point;
 import ru.shumilin.geometry.points.Point3D;
-import ru.shumilin.geometry.rectangles.SquareInheritance;
-import ru.shumilin.geometry.rectangles.SquareWithAreaCache;
-import ru.shumilin.numbers.Fraction;
-import ru.shumilin.other.IntStr;
-import ru.shumilin.other.Summator;
-import ru.shumilin.other.Temperature;
+import ru.shumilin.human.Name;
 import ru.shumilin.storages.Box;
 import ru.shumilin.storages.Storage;
-import ru.shumilin.stream.DataStream;
+import ru.shumilin.tests.NumbersTest;
+import ru.shumilin.tests.TestExecutor;
+import ru.shumilin.tests.GeometryTest;
+import ru.shumilin.textClasses.ObjectsReader;
+import ru.shumilin.textClasses.ObjectsWriter;
+import ru.shumilin.textClasses.TestToWrite;
 import ru.shumilin.university.IllegalMarkException;
 import ru.shumilin.university.Student;
-import ru.shumilin.university.StudentSave;
 import ru.shumilin.university.graduationSystems.GraduationSystem;
 import ru.shumilin.university.graduationSystems.SchoolGraduationSystem;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.nio.file.Files;
 import java.util.*;
 import java.util.List;
-import java.util.function.Supplier;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 import static java.lang.Integer.parseInt;
 import static java.lang.Math.pow;
@@ -1471,7 +1468,30 @@ public class Main {
 
 //        System.out.println(symbolCounter(List.of("hello", "world!", "No"), "o"));
 
+//        System.out.println(toPolylines(new File("src/main/java/ru/shumilin/other/test")));
 
+//        TestExecutor.execute(GeometryTest.class, NumbersTest.class);
+//        System.out.println(TestExecutor.getResults().values());
+
+//        ObjectsWriter objectsWriter = ObjectsWriter.of("sgd");
+//        File file = objectsWriter.write(new TestToWrite("pety","asdfg"),new Name("ads") ,new TestToWrite("Sdfgh","123"));
+//
+//        try(Scanner sc = new Scanner(file)){
+//            while (sc.hasNextLine()){
+//                System.out.println(sc.nextLine());
+//            }
+//        }catch (FileNotFoundException e){
+//            throw new RuntimeException(e);
+//        }
+//
+//        System.out.println(ObjectsReader.of(TestToWrite.class).read(file));
+
+        Summerable summerable = new Summer(1,5);
+        summerable = CacheProxyCreator.create(summerable);
+        System.out.println(summerable.sum());
+        System.out.println(summerable.sum());
+
+        //аннотации 2 и 3
     }
 
     //--------------------СТАТИЧЕСКИЕ МЕТОДЫ--------------------------
@@ -1661,10 +1681,63 @@ public class Main {
 
     //Если равны y объединяем в Polyline и то же самое что и в toPolyline
     @SneakyThrows
-    public static List<Polyline> toPolylineFromFile(File file){
-        Scanner scanner = new Scanner(file);
-         Stream.generate(scanner::nextLine).
-                map(String::strip)
-                 .map(new )
+    public static List<Polyline> toPolylines(File file){
+        Files.lines(file.toPath())
+                .map(x -> x.split(" "))
+                .map(x -> new Point(parseInt(x[0]), parseInt(x[1])))
+                .distinct()
+                .sorted(Comparator.comparingInt(x -> x.x))
+                .map(x -> new Point(x.x, Math.abs(x.y)));
+
+
+        return null;
     }
+
+    // REFLECTION
+    public static List<Field> fieldCollection(Class<?> clazz){
+        List<Field> res = new ArrayList<>();
+
+        while (clazz != null) {
+            res.addAll(Arrays.asList(clazz.getDeclaredFields()));
+            clazz = clazz.getSuperclass();
+        }
+
+        return res;
+    }
+
+    @SneakyThrows
+    public static void lineConnector(Line first, Line second){
+        Field firstEnd = first.getClass().getDeclaredField("end");
+        firstEnd.setAccessible(true);
+
+        Field secondStart = second.getClass().getDeclaredField("start");
+        secondStart.setAccessible(true);
+
+        secondStart.set(second, firstEnd.get(first));
+    }
+
+    @SneakyThrows
+    public static void validate(Object obj, Class<?> test){
+        List<Method> testMethods = List.of(test.getDeclaredMethods());
+
+        try {
+            for(Method testMethod : testMethods){
+                testMethod.setAccessible(true);
+                testMethod.invoke(obj);
+            }
+        }catch (InvocationTargetException e){
+            e.getCause();
+        }
+
+
+    }
+
+//    public <T> T cache(T obj){
+//        Class<?> clazz = obj.getClass();
+//        List<Method> allMethods = List.of(clazz.getDeclaredMethods());
+//        List<Method> testMethods = new ArrayList<>();
+//
+//    }
+
+
 }

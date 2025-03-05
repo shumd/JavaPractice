@@ -29,6 +29,14 @@
       <version>1.18.34</version>
       <scope>provided</scope>
     </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.codehaus.mojo/exec-maven-plugin -->
+    <dependency>
+      <groupId>org.codehaus.mojo</groupId>
+      <artifactId>exec-maven-plugin</artifactId>
+      <version>3.5.0</version>
+    </dependency>
+
   </dependencies>
   <build>
     <plugins>
@@ -38,6 +46,24 @@
         <configuration>
           <source>21</source>
           <target>21</target>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.5.0</version>
+        <executions>
+          <execution>
+            <id>my-execution</id>
+            <phase>package</phase>
+            <goals>
+              <goal>java</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <mainClass>ru.shumilin.main.Main</mainClass>
         </configuration>
       </plugin>
     </plugins>
