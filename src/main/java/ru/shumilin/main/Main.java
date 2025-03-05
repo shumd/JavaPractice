@@ -1491,6 +1491,7 @@ public class Main {
         System.out.println(summerable.sum());
         System.out.println(summerable.sum());
 
+        // Test
         //аннотации 2 и 3
     }
 
