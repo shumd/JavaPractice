@@ -2,9 +2,10 @@ package ru.shumilin.main;
 
 import lombok.SneakyThrows;
 import ru.shumilin.animals.cats.Meowable;
-import ru.shumilin.cache.CacheProxyCreator;
-import ru.shumilin.cache.Summer;
-import ru.shumilin.cache.Summerable;
+import ru.shumilin.annotations.AnnotationsMethods;
+import ru.shumilin.annotations.Invoke;
+import ru.shumilin.annotations.ToString;
+import ru.shumilin.annotations.ToStringTest;
 import ru.shumilin.connection.Connection;
 import ru.shumilin.connection.ConnectionLostException;
 import ru.shumilin.geometry.lines.Line;
@@ -15,19 +16,11 @@ import ru.shumilin.geometry.points.Point3D;
 import ru.shumilin.human.Name;
 import ru.shumilin.storages.Box;
 import ru.shumilin.storages.Storage;
-import ru.shumilin.tests.NumbersTest;
-import ru.shumilin.tests.TestExecutor;
-import ru.shumilin.tests.GeometryTest;
-import ru.shumilin.textClasses.ObjectsReader;
-import ru.shumilin.textClasses.ObjectsWriter;
-import ru.shumilin.textClasses.TestToWrite;
 import ru.shumilin.university.IllegalMarkException;
 import ru.shumilin.university.Student;
 import ru.shumilin.university.graduationSystems.GraduationSystem;
-import ru.shumilin.university.graduationSystems.SchoolGraduationSystem;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -1341,9 +1334,9 @@ public class Main {
 //        // 6.3.4 Коллекционирование
 //        List<List<Integer>> positiveAndNegative = collect(integers,
 //                () -> List.of(new ArrayList<>(), new ArrayList<>()),
-//                (lst, value) -> {
-//            if(value >= 0) lst.getFirst().add(value);
-//            else lst.get(1).add(value);
+//                (lst, Values) -> {
+//            if(Values >= 0) lst.getFirst().add(Values);
+//            else lst.get(1).add(Values);
 //        });
 //
 //        System.out.println(positiveAndNegative);
@@ -1486,18 +1479,23 @@ public class Main {
 //
 //        System.out.println(ObjectsReader.of(TestToWrite.class).read(file));
 
-        Summerable summerable = new Summer(1,5);
-        summerable = CacheProxyCreator.create(summerable);
-        System.out.println(summerable.sum());
-        System.out.println(summerable.sum());
+//        Summerable summerable = new Summer(1,5);
+//        summerable = CacheProxyCreator.create(summerable);
+//        System.out.println(summerable.sum());
+//        System.out.println(summerable.sum());
 
         // Test
         //аннотации 2 и 3
+
+//        System.out.println(AnnotationsMethods.collect(TestCollector.class));
+        ToStringTest toStringTest = new ToStringTest("das",123);
+        System.out.println(toStringTest);
     }
 
     //--------------------СТАТИЧЕСКИЕ МЕТОДЫ--------------------------
 
     // 4.1.4 Возведение в степень
+    @Invoke
     public static double myPow(String x, String y) {
         int num = parseInt(x);
         int pow = parseInt(y);
@@ -1733,12 +1731,6 @@ public class Main {
 
     }
 
-//    public <T> T cache(T obj){
-//        Class<?> clazz = obj.getClass();
-//        List<Method> allMethods = List.of(clazz.getDeclaredMethods());
-//        List<Method> testMethods = new ArrayList<>();
-//
-//    }
 
 
 }

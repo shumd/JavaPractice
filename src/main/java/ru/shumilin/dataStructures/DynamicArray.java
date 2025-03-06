@@ -1,5 +1,8 @@
 package ru.shumilin.dataStructures;
 
+import ru.shumilin.annotations.Validate;
+
+@Validate(DynamicArray.class)
 public class DynamicArray {
     private final static int START = 5;
     private int indexForNewEl;

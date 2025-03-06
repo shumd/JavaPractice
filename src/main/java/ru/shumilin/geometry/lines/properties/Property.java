@@ -10,7 +10,7 @@ public abstract class Property {
     protected Object value;
 
 //    public <T> T getValue() {
-//        return (T) value;
+//        return (T) Values;
 //    }
 }
 

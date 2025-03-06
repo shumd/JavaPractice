@@ -1,5 +1,8 @@
 package ru.shumilin.human;
 
+import ru.shumilin.annotations.Default;
+
+@Default(Name.class)
 public class Human {
     private static final int MIN_HEIGHT = 0;
     private static final int MAX_HEIGHT = 500;

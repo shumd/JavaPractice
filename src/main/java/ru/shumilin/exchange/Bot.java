@@ -1,5 +1,8 @@
 package ru.shumilin.exchange;
 
+import ru.shumilin.annotations.Two;
+
+@Two(first = "Test", second = 123)
 public class Bot implements Checkable{
     private int purchasePrice;
 

@@ -21,7 +21,7 @@ public class Storage <T>{
     }
 
     public static <V> Storage<V> of(V value){
-        Objects.requireNonNull(value, "value must not be null");
+        Objects.requireNonNull(value, "Values must not be null");
         return new Storage<>(value);
     }
     public static <V> Storage<V> of(Supplier<V> supplier){

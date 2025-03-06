@@ -1,5 +1,6 @@
 package ru.shumilin.human;
 
+
 public class Name {
     String surname;
     String name;
