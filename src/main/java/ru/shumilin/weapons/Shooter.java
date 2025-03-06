@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import ru.shumilin.annotations.Cache;
 
-@Cache
 public class Shooter {
     String name;
     @Setter @Getter

@@ -2,10 +2,10 @@ package ru.shumilin.main;
 
 import lombok.SneakyThrows;
 import ru.shumilin.animals.cats.Meowable;
-import ru.shumilin.annotations.AnnotationsMethods;
-import ru.shumilin.annotations.Invoke;
-import ru.shumilin.annotations.ToString;
-import ru.shumilin.annotations.ToStringTest;
+import ru.shumilin.annotations.*;
+import ru.shumilin.cache.CacheProxyCreator;
+import ru.shumilin.cache.Summer;
+import ru.shumilin.cache.Summerable;
 import ru.shumilin.connection.Connection;
 import ru.shumilin.connection.ConnectionLostException;
 import ru.shumilin.geometry.lines.Line;
@@ -1479,17 +1479,19 @@ public class Main {
 //
 //        System.out.println(ObjectsReader.of(TestToWrite.class).read(file));
 
-//        Summerable summerable = new Summer(1,5);
-//        summerable = CacheProxyCreator.create(summerable);
-//        System.out.println(summerable.sum());
-//        System.out.println(summerable.sum());
+        Summerable summerable = new Summer(1,5);
+        summerable = CacheProxyCreator.create(summerable);
+        System.out.println(summerable.sum());
+        System.out.println(summerable.sum());
 
         // Test
         //аннотации 2 и 3
 
 //        System.out.println(AnnotationsMethods.collect(TestCollector.class));
-        ToStringTest toStringTest = new ToStringTest("das",123);
-        System.out.println(toStringTest);
+//        ToStringTest toStringTest = new ToStringTest("das",123);
+//        System.out.println(toStringTest);
+//        Human human = new Human(-1);
+//        AnnotationsMethods.validate(human);
     }
 
     //--------------------СТАТИЧЕСКИЕ МЕТОДЫ--------------------------
@@ -1714,23 +1716,4 @@ public class Main {
 
         secondStart.set(second, firstEnd.get(first));
     }
-
-    @SneakyThrows
-    public static void validate(Object obj, Class<?> test){
-        List<Method> testMethods = List.of(test.getDeclaredMethods());
-
-        try {
-            for(Method testMethod : testMethods){
-                testMethod.setAccessible(true);
-                testMethod.invoke(obj);
-            }
-        }catch (InvocationTargetException e){
-            e.getCause();
-        }
-
-
-    }
-
-
-
 }
