@@ -1479,19 +1479,16 @@ public class Main {
 //
 //        System.out.println(ObjectsReader.of(TestToWrite.class).read(file));
 
-        Summerable summerable = new Summer(1,5);
-        summerable = CacheProxyCreator.create(summerable);
-        System.out.println(summerable.sum());
-        System.out.println(summerable.sum());
-
-        // Test
-        //аннотации 2 и 3
+//        Summerable summerable = new Summer(1,5);
+//        summerable = CacheProxyCreator.create(summerable);
+//        System.out.println(summerable.sum());
+//        System.out.println(summerable.sum());
 
 //        System.out.println(AnnotationsMethods.collect(TestCollector.class));
 //        ToStringTest toStringTest = new ToStringTest("das",123);
 //        System.out.println(toStringTest);
-//        Human human = new Human(-1);
-//        AnnotationsMethods.validate(human);
+        Human human = new Human(-1);
+        Validator.validate(human);
     }
 
     //--------------------СТАТИЧЕСКИЕ МЕТОДЫ--------------------------
