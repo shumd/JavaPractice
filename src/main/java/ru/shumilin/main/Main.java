@@ -3,9 +3,6 @@ package ru.shumilin.main;
 import lombok.SneakyThrows;
 import ru.shumilin.animals.cats.Meowable;
 import ru.shumilin.annotations.*;
-import ru.shumilin.cache.CacheProxyCreator;
-import ru.shumilin.cache.Summer;
-import ru.shumilin.cache.Summerable;
 import ru.shumilin.connection.Connection;
 import ru.shumilin.connection.ConnectionLostException;
 import ru.shumilin.geometry.lines.Line;
@@ -13,7 +10,6 @@ import ru.shumilin.geometry.lines.LineGeneric;
 import ru.shumilin.geometry.lines.Polyline;
 import ru.shumilin.geometry.points.Point;
 import ru.shumilin.geometry.points.Point3D;
-import ru.shumilin.human.Name;
 import ru.shumilin.storages.Box;
 import ru.shumilin.storages.Storage;
 import ru.shumilin.university.IllegalMarkException;
@@ -22,8 +18,6 @@ import ru.shumilin.university.graduationSystems.GraduationSystem;
 
 import java.io.File;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.util.*;
 import java.util.List;
@@ -1487,8 +1481,6 @@ public class Main {
 //        System.out.println(AnnotationsMethods.collect(TestCollector.class));
 //        ToStringTest toStringTest = new ToStringTest("das",123);
 //        System.out.println(toStringTest);
-        Human human = new Human(-1);
-        Validator.validate(human);
     }
 
     //--------------------СТАТИЧЕСКИЕ МЕТОДЫ--------------------------

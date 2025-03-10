@@ -17,17 +17,18 @@ public class Validator {
 
     @SneakyThrows
     private static void validate(Object object) {
-        Validate validate = getValidateAnnotation(object).orElse(null);
+        Validate validate = validateAnnotationFrom(object).orElse(null);
 
         if(validate != null) {
             Map<Object, List<Method>> testMap = testMap(validate, object.getClass());
 
-            for(Object testObj : testMap.keySet()){
-                for(Method m : testMap.get(testObj)){
+            for(Object test : testMap.keySet()){
+                for(Method m : testMap.get(test)){
+                    m.setAccessible(true);
                     try {
-                        m.invoke(testObj,object);
+                        m.invoke(test,object);
                     }catch (InvocationTargetException e){
-                        if(e.getCause() instanceof TestNotPassedException) {
+                        if(e.getCause().getClass().equals(ValidateNotPassedException.class)) {
                             throw e.getCause();
                         }else throw new RuntimeException("Test " + m.getName() + " is incorrect");
                     }
@@ -36,7 +37,7 @@ public class Validator {
         }
     }
 
-    private static Optional<Validate> getValidateAnnotation(Object object) {
+    private static Optional<Validate> validateAnnotationFrom(Object object) {
         for(Annotation annotation : object.getClass().getDeclaredAnnotations()) {
             if(annotation.annotationType().equals(Validate.class)) {
                 return Optional.of((Validate) annotation);
