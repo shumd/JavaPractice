@@ -4,6 +4,7 @@ import lombok.SneakyThrows;
 import ru.shumilin.animals.cats.Meowable;
 import ru.shumilin.annotations.*;
 import ru.shumilin.cache.CacheProxyCreator;
+import ru.shumilin.cache.Summer;
 import ru.shumilin.cache.Summerable;
 import ru.shumilin.connection.Connection;
 import ru.shumilin.connection.ConnectionLostException;
@@ -1477,9 +1478,11 @@ public class Main {
 //
 //        System.out.println(ObjectsReader.of(TestToWrite.class).read(file));
 
-        System.out.println("hello");
-
         // тесты на proxyHandler
+        Summerable summerable = new Summer(1,2);
+        summerable = CacheProxyCreator.create(summerable);
+        summerable.sum();
+        summerable.sum();
     }
 
     //--------------------СТАТИЧЕСКИЕ МЕТОДЫ--------------------------

@@ -19,7 +19,7 @@ public class CacheProxyHandler implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        method = proxy.getClass().getMethod(method.getName(), method.getParameterTypes());
+        method = obj.getClass().getMethod(method.getName(), method.getParameterTypes());
 
         if(method.isAnnotationPresent(Mutator.class)){
             cacheMap.clear();
