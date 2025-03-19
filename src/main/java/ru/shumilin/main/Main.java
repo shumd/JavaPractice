@@ -3,6 +3,8 @@ package ru.shumilin.main;
 import lombok.SneakyThrows;
 import ru.shumilin.animals.cats.Meowable;
 import ru.shumilin.annotations.*;
+import ru.shumilin.cache.CacheProxyCreator;
+import ru.shumilin.cache.Summerable;
 import ru.shumilin.connection.Connection;
 import ru.shumilin.connection.ConnectionLostException;
 import ru.shumilin.geometry.lines.Line;
@@ -18,6 +20,8 @@ import ru.shumilin.university.graduationSystems.GraduationSystem;
 
 import java.io.File;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.util.*;
 import java.util.List;
@@ -1473,20 +1477,14 @@ public class Main {
 //
 //        System.out.println(ObjectsReader.of(TestToWrite.class).read(file));
 
-//        Summerable summerable = new Summer(1,5);
-//        summerable = CacheProxyCreator.create(summerable);
-//        System.out.println(summerable.sum());
-//        System.out.println(summerable.sum());
+        System.out.println("hello");
 
-//        System.out.println(AnnotationsMethods.collect(TestCollector.class));
-//        ToStringTest toStringTest = new ToStringTest("das",123);
-//        System.out.println(toStringTest);
+        // тесты на proxyHandler
     }
 
     //--------------------СТАТИЧЕСКИЕ МЕТОДЫ--------------------------
 
     // 4.1.4 Возведение в степень
-    @Invoke
     public static double myPow(String x, String y) {
         int num = parseInt(x);
         int pow = parseInt(y);

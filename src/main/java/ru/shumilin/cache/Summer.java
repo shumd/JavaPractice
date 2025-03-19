@@ -10,7 +10,7 @@ import ru.shumilin.annotations.Cache;
 public class Summer implements Summerable{
     private int x,y;
 
-    @Override @Cache(value = "su")
+    @Override @Cache(value = "sum")
     public int sum(){
         System.out.println("summing");
         return x+y;

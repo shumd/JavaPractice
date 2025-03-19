@@ -81,6 +81,8 @@
           <mainClass>ru.shumilin.main.Main</mainClass>
         </configuration>
       </plugin>
+
+
     </plugins>
   </build>
 </project>

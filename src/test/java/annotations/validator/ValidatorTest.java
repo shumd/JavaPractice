@@ -18,7 +18,7 @@ public class ValidatorTest {
     @DisplayName("Validate one object (positive test)")
     public void test2(){
         Human human = new Human(1);
-        Validator.validate(human);
+        Assertions.assertDoesNotThrow(() -> Validator.validate(human));
     }
 
     @Test
@@ -35,7 +35,7 @@ public class ValidatorTest {
     public void test4(){
         Human human = new Human(1);
         Building building = new Building(1);
-        Validator.validate(human, building);
+        Assertions.assertDoesNotThrow(() -> Validator.validate(human, building));
     }
 
     @Test
@@ -50,7 +50,7 @@ public class ValidatorTest {
     @DisplayName("Validate using renamed annotation (positive)")
     public void test6(){
         Employee employee = new Employee(1);
-        Validator.validate(employee);
+        Assertions.assertDoesNotThrow(() -> Validator.validate(employee));
     }
 
     @Test
