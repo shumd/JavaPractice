@@ -14,5 +14,10 @@ public class LineSummator implements Summarable<Line> {
     }
 
     @Mutator
-    public void mutate() {}
+    public void mutate(){}
+
+    @Cache
+    public Line add(){
+        return new Line()
+    }
 }

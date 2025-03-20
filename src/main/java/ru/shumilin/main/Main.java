@@ -1478,11 +1478,7 @@ public class Main {
 //
 //        System.out.println(ObjectsReader.of(TestToWrite.class).read(file));
 
-        // тесты на proxyHandler
-        Summerable summerable = new Summer(1,2);
-        summerable = CacheProxyCreator.create(summerable);
-        summerable.sum();
-        summerable.sum();
+        // 9.1, 9.2 задачник
     }
 
     //--------------------СТАТИЧЕСКИЕ МЕТОДЫ--------------------------
