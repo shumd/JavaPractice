@@ -1,6 +1,8 @@
 package ru.shumilin.main;
 
 import lombok.SneakyThrows;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import ru.shumilin.animals.cats.Meowable;
 import ru.shumilin.annotations.*;
 import ru.shumilin.cache.CacheProxyCreator;
@@ -26,6 +28,7 @@ import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.util.*;
 import java.util.List;
+import java.util.function.Predicate;
 
 import static java.lang.Integer.parseInt;
 import static java.lang.Math.pow;
@@ -1478,7 +1481,22 @@ public class Main {
 //
 //        System.out.println(ObjectsReader.of(TestToWrite.class).read(file));
 
-        // 9.1, 9.2 задачник
+//        Summerable summerable = new Summer(1,2);
+//        summerable = CacheProxyCreator.create(summerable);
+//        summerable.sum();
+//        summerable.sum();
+
+        ApplicationContext ctx = new AnnotationConfigApplicationContext("ru.shumilin.spring");
+        System.out.println(ctx.getBean("hello"));
+
+        System.out.println(ctx.getBean("random"));
+        System.out.println(ctx.getBean("random"));
+
+        System.out.println(ctx.getBean("date"));
+
+        System.out.println(ctx.getBean("predicate", Predicate.class).test(5));
+
+
     }
 
     //--------------------СТАТИЧЕСКИЕ МЕТОДЫ--------------------------
