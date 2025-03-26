@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
+import ru.shumilin.spring.trafficLight.color.Color;
 import ru.shumilin.university.Student;
 
 import java.util.*;
@@ -84,4 +85,5 @@ public class Config {
     public Student vasyaStudent(@Qualifier("range") Predicate<Integer> range) {
         return new Student("Vasya", range, 2,2, 2, 3, 4, 3);
     }
+
 }

@@ -16,6 +16,7 @@ import ru.shumilin.geometry.lines.Polyline;
 import ru.shumilin.geometry.points.Point;
 import ru.shumilin.geometry.points.Point3D;
 import ru.shumilin.spring.StudentFactory;
+import ru.shumilin.spring.trafficLight.TrafficLight;
 import ru.shumilin.storages.Box;
 import ru.shumilin.storages.Storage;
 import ru.shumilin.university.IllegalMarkException;
@@ -1490,6 +1491,11 @@ public class Main {
         // --------------------------SPRING-----------------------------
 
         ApplicationContext ctx = new AnnotationConfigApplicationContext("ru.shumilin.spring");
+        TrafficLight trafficLight = ctx.getBean(TrafficLight.class);
+
+        for(int i = 0; i < 10; i++){
+            trafficLight.next();
+        }
 
     }
 
