@@ -5,11 +5,12 @@ import ru.shumilin.university.graduationSystems.GraduationSystem;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class StudentSave {
     @Getter
     private final String name;
-    private final GraduationSystem graduationSystem;
+    private final Predicate<Integer> graduationSystem;
     private final List<Integer> marks;
 
     public StudentSave(Student student){

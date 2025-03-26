@@ -15,6 +15,7 @@ import ru.shumilin.geometry.lines.LineGeneric;
 import ru.shumilin.geometry.lines.Polyline;
 import ru.shumilin.geometry.points.Point;
 import ru.shumilin.geometry.points.Point3D;
+import ru.shumilin.spring.StudentFactory;
 import ru.shumilin.storages.Box;
 import ru.shumilin.storages.Storage;
 import ru.shumilin.university.IllegalMarkException;
@@ -1486,16 +1487,9 @@ public class Main {
 //        summerable.sum();
 //        summerable.sum();
 
+        // --------------------------SPRING-----------------------------
+
         ApplicationContext ctx = new AnnotationConfigApplicationContext("ru.shumilin.spring");
-        System.out.println(ctx.getBean("hello"));
-
-        System.out.println(ctx.getBean("random"));
-        System.out.println(ctx.getBean("random"));
-
-        System.out.println(ctx.getBean("date"));
-
-        System.out.println(ctx.getBean("predicate", Predicate.class).test(5));
-
 
     }
 
@@ -1560,39 +1554,39 @@ public class Main {
     }
 
     //4.2.4 Восстановление студентов
-    public static List<Student> convert(
-            List<String> constructorArgs,
-            List<String> addArgs) {
-        List<Student> res = new ArrayList<>();
-
-        for(int i = 0 ; i < constructorArgs.size(); i++) {
-            String[] constructor = constructorArgs.get(i).split(" ");
-
-            String constructorMessage = "Студента " + constructor[0] + " создать невозможно";
-
-            try {
-                Integer[] add = new Integer[0];
-                if(addArgs != null && !addArgs.isEmpty()) {
-                    add = Arrays.stream(addArgs.get(i).split(" "))
-                            .map(Integer::parseInt)
-                            .toArray(Integer[]::new);
-                }
-
-                GraduationSystem system;
-
-                Integer min = Integer.parseInt(constructor[1]);
-                Integer max = Integer.parseInt(constructor[2]);
-
-                system = new GraduationSystem(min,max) {};
-
-                res.add(new Student(constructor[0], system,
-                        add));
-            }catch (NumberFormatException | IllegalMarkException e){
-                return convert(constructorArgs, new ArrayList<>());
-            }
-        }
-        return res;
-    }
+//    public static List<Student> convert(
+//            List<String> constructorArgs,
+//            List<String> addArgs) {
+//        List<Student> res = new ArrayList<>();
+//
+//        for(int i = 0 ; i < constructorArgs.size(); i++) {
+//            String[] constructor = constructorArgs.get(i).split(" ");
+//
+//            String constructorMessage = "Студента " + constructor[0] + " создать невозможно";
+//
+//            try {
+//                Integer[] add = new Integer[0];
+//                if(addArgs != null && !addArgs.isEmpty()) {
+//                    add = Arrays.stream(addArgs.get(i).split(" "))
+//                            .map(Integer::parseInt)
+//                            .toArray(Integer[]::new);
+//                }
+//
+//                GraduationSystem system;
+//
+//                Integer min = Integer.parseInt(constructor[1]);
+//                Integer max = Integer.parseInt(constructor[2]);
+//
+//                system = new GraduationSystem(min,max) {};
+//
+//                res.add(new Student(constructor[0], system,
+//                        add));
+//            }catch (NumberFormatException | IllegalMarkException e){
+//                return convert(constructorArgs, new ArrayList<>());
+//            }
+//        }
+//        return res;
+//    }
 
     //6.1.1 Обобщенная коробка
     public static <T> void someBoxMethod(Box<T> box){

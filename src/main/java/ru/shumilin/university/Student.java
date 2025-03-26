@@ -6,15 +6,18 @@ import ru.shumilin.university.graduationSystems.GraduationSystem;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.IntPredicate;
+import java.util.function.Predicate;
+import java.util.stream.IntStream;
 
 @Getter
 public class Student implements Comparable<Student> {
-    private GraduationSystem graduationSystem;
+    private Predicate<Integer> graduationSystem;
     private String name;
     private List<Integer> marks = new ArrayList<>();
 
 
-    public Student(String name, GraduationSystem graduationSystem,Integer...marks){
+    public Student(String name, Predicate<Integer> graduationSystem,Integer...marks){
         setName(name);
         this.graduationSystem = graduationSystem;
         addMarks(marks);
@@ -40,7 +43,7 @@ public class Student implements Comparable<Student> {
 
     public void addMarks(Integer... marks){
         for (Integer i : marks){
-            if(i < graduationSystem.getMinMark() || i > graduationSystem.getMaxMark()){
+            if(!graduationSystem.test(i)){
                 throw new IllegalMarkException(i);
             }
             this.marks.add(i);
@@ -67,7 +70,14 @@ public class Student implements Comparable<Student> {
     }
 
     public boolean isExcellentStudent(){
-        return averageMark()==graduationSystem.getMaxMark();
+        return averageMark() == maxGradSystemMark();
+    }
+    private int maxGradSystemMark(){
+        int res = 0;
+        while (graduationSystem.test(res)){
+            res++;
+        }
+        return res;
     }
 
     @Override
