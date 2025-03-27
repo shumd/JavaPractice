@@ -5,19 +5,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import ru.shumilin.spring.trafficLight.TrafficLight;
 
 @Component
-@Qualifier("green")
 @RequiredArgsConstructor
+@Lazy
 public class Green implements Color {
-    private  ApplicationContext ctx;
-
-    @Autowired
-    public void setApplicationContext(ApplicationContext ctx) {
-        this.ctx = ctx;
-    }
+    private Color next;
 
     @Override
     public String getColor() {
@@ -26,6 +22,6 @@ public class Green implements Color {
 
     @Override
     public void next(TrafficLight trafficLight) {
-        trafficLight.setColor(ctx.getBean(Yellow.class));
+        trafficLight.setColor(yellow);
     }
 }

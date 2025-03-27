@@ -11,7 +11,7 @@ import ru.shumilin.spring.trafficLight.color.Color;
 @Component
 @Data
 public class TrafficLight {
-    private static final String STARTING_COLOR_BEAN_NAME = "";
+    private static final String STARTING_COLOR_BEAN_NAME = "yellow";
     private ApplicationContext ctx;
     private Color color;
 

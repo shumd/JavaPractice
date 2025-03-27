@@ -4,18 +4,22 @@ import lombok.SneakyThrows;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import ru.shumilin.animals.cats.Meowable;
+import ru.shumilin.animals.cats.Tiger;
 import ru.shumilin.annotations.*;
 import ru.shumilin.cache.CacheProxyCreator;
 import ru.shumilin.cache.Summer;
 import ru.shumilin.cache.Summerable;
 import ru.shumilin.connection.Connection;
 import ru.shumilin.connection.ConnectionLostException;
+import ru.shumilin.exchange.Share;
 import ru.shumilin.geometry.lines.Line;
 import ru.shumilin.geometry.lines.LineGeneric;
 import ru.shumilin.geometry.lines.Polyline;
 import ru.shumilin.geometry.points.Point;
 import ru.shumilin.geometry.points.Point3D;
 import ru.shumilin.spring.StudentFactory;
+import ru.shumilin.spring.exchange.Bot;
+import ru.shumilin.spring.exchange.Printer;
 import ru.shumilin.spring.trafficLight.TrafficLight;
 import ru.shumilin.storages.Box;
 import ru.shumilin.storages.Storage;
@@ -1497,6 +1501,23 @@ public class Main {
             trafficLight.next();
         }
 
+
+//        Share orcl = new Share("ORCL", 75);
+//        Share TSLA = new Share("TSLA", 696);
+//
+//        Printer printer = ctx.getBean(Printer.class);
+//        printer.subscribe(orcl, TSLA);
+//
+//        Bot bot = ctx.getBean(Bot.class);
+//        bot.subscribe(orcl, 70);
+//
+//        Random rand = new Random();
+//        while(orcl.getPrice() != 65){
+//            TSLA.setPrice(rand.nextInt(30000));
+//            orcl.setPrice(orcl.getPrice() -1);
+//
+//            System.out.println();
+//        }
     }
 
     //--------------------СТАТИЧЕСКИЕ МЕТОДЫ--------------------------

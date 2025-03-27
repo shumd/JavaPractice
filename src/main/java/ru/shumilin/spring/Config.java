@@ -3,6 +3,7 @@ package ru.shumilin.spring;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
 import ru.shumilin.spring.trafficLight.color.Color;
 import ru.shumilin.university.Student;
@@ -12,7 +13,7 @@ import java.util.function.Predicate;
 
 @Configuration
 public class Config {
-    private final List<Integer> usedNumbers = new ArrayList<>();
+    private final List<Integer> numbers = new ArrayList<>();
 
     @Bean
     public String hello() {
@@ -23,23 +24,22 @@ public class Config {
     @Scope("prototype")
     public int random(@Qualifier("min") int min,
                       @Qualifier("max") int max) {
-        boolean isEmpty = !(usedNumbers.size() == max-min);
-        Random random = new Random();
-        int randomNumber = random.nextInt(min,max+1);
-
-        if(isEmpty){
-            while(usedNumbers.contains(randomNumber)){
-                randomNumber = random.nextInt(min,max);
+        if(numbers.isEmpty()){
+            for(int i = min; i != max; max++){
+                numbers.add(i++);
             }
-        }else {
-            usedNumbers.clear();
         }
 
-        usedNumbers.add(randomNumber);
-        return randomNumber;
+        Random random = new Random();
+        int randomIndex = random.nextInt(0,numbers.size());
+        int res = numbers.get(randomIndex);
+        numbers.remove(randomIndex);
+
+        return res;
     }
 
     @Bean
+    @Lazy
     public Date date(){
         return new Date();
     }
@@ -72,6 +72,7 @@ public class Config {
     }
 
     @Bean
+    @Scope("prototype")
     public Review bestReview(List<Review> reviews){
         reviews.sort(Comparator.comparingInt(Review::getRating));
         return reviews.getLast();
@@ -85,5 +86,4 @@ public class Config {
     public Student vasyaStudent(@Qualifier("range") Predicate<Integer> range) {
         return new Student("Vasya", range, 2,2, 2, 3, 4, 3);
     }
-
 }
