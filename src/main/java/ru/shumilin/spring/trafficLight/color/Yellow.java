@@ -1,17 +1,28 @@
 package ru.shumilin.spring.trafficLight.color;
 
 
+import jakarta.annotation.PostConstruct;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import ru.shumilin.spring.trafficLight.TrafficLight;
 
 @Component
-@Lazy
+@RequiredArgsConstructor
+@Data
 public class Yellow implements Color {
-    private Color previous;
-    private Color next;
-    private TrafficLight trafficLight;
-    private boolean isPreviousRed = trafficLight.getColor().equals(red);
+    private final Red red;
+    private final Green green;
+    private boolean isPreviousRed;
+
+    @PostConstruct
+    public void init(){
+        red.setNext(this);
+        green.setNext(this);
+    }
 
     @Override
     public String getColor() {
@@ -21,10 +32,10 @@ public class Yellow implements Color {
     @Override
     public void next(TrafficLight trafficLight) {
         if (isPreviousRed) {
-            trafficLight.setColor(green);
+            trafficLight.setNextColor(green);
             isPreviousRed = false;
         }else {
-            trafficLight.setColor(red);
+            trafficLight.setNextColor(red);
             isPreviousRed = true;
         }
     }

@@ -23,7 +23,7 @@ public class Entity {
         return res.append(fields).toString();
     }
 
-    private static Set<Field> fieldsWithCorrectAnnotation(Class<?> clazz){
+    public static Set<Field> fieldsWithCorrectAnnotation(Class<?> clazz){
         ToString.Values classAnnotationValue = clazz.isAnnotationPresent(ToString.class) ?
                 clazz.getAnnotation(ToString.class).value() :
                 ToString.Values.NO;

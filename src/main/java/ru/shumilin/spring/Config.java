@@ -66,10 +66,10 @@ public class Config {
     public Review badReview(){
         return new Review("Сойдет", 3);
     }
-    @Bean
-    public Review randomReview(@Qualifier("random") int random){
-        return new Review("Сложно сказать", random);
-    }
+//    @Bean
+//    public Review randomReview(@Qualifier("random") int random){
+//        return new Review("Сложно сказать", random);
+//    }
 
     @Bean
     @Scope("prototype")

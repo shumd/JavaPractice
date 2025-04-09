@@ -4,37 +4,25 @@ import lombok.SneakyThrows;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import ru.shumilin.animals.cats.Meowable;
-import ru.shumilin.animals.cats.Tiger;
-import ru.shumilin.annotations.*;
-import ru.shumilin.cache.CacheProxyCreator;
-import ru.shumilin.cache.Summer;
-import ru.shumilin.cache.Summerable;
 import ru.shumilin.connection.Connection;
 import ru.shumilin.connection.ConnectionLostException;
-import ru.shumilin.exchange.Share;
 import ru.shumilin.geometry.lines.Line;
 import ru.shumilin.geometry.lines.LineGeneric;
 import ru.shumilin.geometry.lines.Polyline;
 import ru.shumilin.geometry.points.Point;
 import ru.shumilin.geometry.points.Point3D;
-import ru.shumilin.spring.StudentFactory;
-import ru.shumilin.spring.exchange.Bot;
-import ru.shumilin.spring.exchange.Printer;
-import ru.shumilin.spring.trafficLight.TrafficLight;
+import ru.shumilin.spring.postprocessor.namePostProcessor.NameAnnotatedBean;
+import ru.shumilin.spring.postprocessor.toStringPostProcessor.Petya;
 import ru.shumilin.storages.Box;
 import ru.shumilin.storages.Storage;
 import ru.shumilin.university.IllegalMarkException;
 import ru.shumilin.university.Student;
-import ru.shumilin.university.graduationSystems.GraduationSystem;
 
 import java.io.File;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.util.*;
 import java.util.List;
-import java.util.function.Predicate;
 
 import static java.lang.Integer.parseInt;
 import static java.lang.Math.pow;
@@ -1495,11 +1483,8 @@ public class Main {
         // --------------------------SPRING-----------------------------
 
         ApplicationContext ctx = new AnnotationConfigApplicationContext("ru.shumilin.spring");
-        TrafficLight trafficLight = ctx.getBean(TrafficLight.class);
-
-        for(int i = 0; i < 10; i++){
-            trafficLight.next();
-        }
+        Petya bean = ctx.getBean(Petya.class);
+        System.out.println(bean);
 
 
 //        Share orcl = new Share("ORCL", 75);
