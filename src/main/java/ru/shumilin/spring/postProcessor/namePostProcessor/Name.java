@@ -1,4 +1,4 @@
-package ru.shumilin.spring.postprocessor.namePostProcessor;
+package ru.shumilin.spring.postProcessor.namePostProcessor;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

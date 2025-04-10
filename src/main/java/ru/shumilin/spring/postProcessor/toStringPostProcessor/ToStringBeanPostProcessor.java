@@ -1,4 +1,4 @@
-package ru.shumilin.spring.postprocessor.toStringPostProcessor;
+package ru.shumilin.spring.postProcessor.toStringPostProcessor;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.springframework.aop.framework.ProxyFactory;

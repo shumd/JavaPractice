@@ -1,4 +1,4 @@
-package ru.shumilin.spring.postprocessor.namePostProcessor;
+package ru.shumilin.spring.postProcessor.namePostProcessor;
 
 import lombok.Data;
 import org.springframework.stereotype.Component;

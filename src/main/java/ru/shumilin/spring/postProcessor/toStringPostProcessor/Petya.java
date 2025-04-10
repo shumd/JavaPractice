@@ -1,4 +1,4 @@
-package ru.shumilin.spring.postprocessor.toStringPostProcessor;
+package ru.shumilin.spring.postProcessor.toStringPostProcessor;
 
 import org.springframework.stereotype.Component;
 import ru.shumilin.annotations.ToString;

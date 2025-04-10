@@ -20,23 +20,23 @@ public class Config {
         return "Hello World";
     }
 
-    @Bean
-    @Scope("prototype")
-    public int random(@Qualifier("min") int min,
-                      @Qualifier("max") int max) {
-        if(numbers.isEmpty()){
-            for(int i = min; i != max; max++){
-                numbers.add(i++);
-            }
-        }
-
-        Random random = new Random();
-        int randomIndex = random.nextInt(0,numbers.size());
-        int res = numbers.get(randomIndex);
-        numbers.remove(randomIndex);
-
-        return res;
-    }
+//    @Bean
+//    @Scope("prototype")
+//    public int random(@Qualifier("min") int min,
+//                      @Qualifier("max") int max) {
+//        if(numbers.isEmpty()){
+//            for(int i = min; i != max; max++){
+//                numbers.add(i++);
+//            }
+//        }
+//
+//        Random random = new Random();
+//        int randomIndex = random.nextInt(0,numbers.size());
+//        int res = numbers.get(randomIndex);
+//        numbers.remove(randomIndex);
+//
+//        return res;
+//    }
 
     @Bean
     @Lazy

@@ -4,6 +4,7 @@ import lombok.SneakyThrows;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import ru.shumilin.animals.cats.Meowable;
+import ru.shumilin.spring.postProcessor.cachePostProcessor.Summerable;
 import ru.shumilin.connection.Connection;
 import ru.shumilin.connection.ConnectionLostException;
 import ru.shumilin.geometry.lines.Line;
@@ -11,8 +12,6 @@ import ru.shumilin.geometry.lines.LineGeneric;
 import ru.shumilin.geometry.lines.Polyline;
 import ru.shumilin.geometry.points.Point;
 import ru.shumilin.geometry.points.Point3D;
-import ru.shumilin.spring.postprocessor.namePostProcessor.NameAnnotatedBean;
-import ru.shumilin.spring.postprocessor.toStringPostProcessor.Petya;
 import ru.shumilin.storages.Box;
 import ru.shumilin.storages.Storage;
 import ru.shumilin.university.IllegalMarkException;
@@ -1483,8 +1482,10 @@ public class Main {
         // --------------------------SPRING-----------------------------
 
         ApplicationContext ctx = new AnnotationConfigApplicationContext("ru.shumilin.spring");
-        Petya bean = ctx.getBean(Petya.class);
-        System.out.println(bean);
+
+        for(int i = 0; i < 20; i++){
+            System.out.println(ctx.getBean("random"));
+        }
 
 
 //        Share orcl = new Share("ORCL", 75);
