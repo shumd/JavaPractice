@@ -7,5 +7,5 @@ import org.springframework.stereotype.Component;
 @HumanAgeValidate
 @Component
 public class Human {
-    private int age = -2;
+    private int age = 2;
 }

@@ -1,6 +1,7 @@
 package ru.shumilin.main;
 
 import lombok.SneakyThrows;
+import org.springframework.cglib.proxy.Enhancer;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import ru.shumilin.animals.cats.Meowable;
@@ -12,6 +13,7 @@ import ru.shumilin.geometry.lines.LineGeneric;
 import ru.shumilin.geometry.lines.Polyline;
 import ru.shumilin.geometry.points.Point;
 import ru.shumilin.geometry.points.Point3D;
+import ru.shumilin.spring.postProcessor.toStringPostProcessor.Petya;
 import ru.shumilin.storages.Box;
 import ru.shumilin.storages.Storage;
 import ru.shumilin.university.IllegalMarkException;
@@ -1487,6 +1489,9 @@ public class Main {
             System.out.println(ctx.getBean("random"));
         }
 
+        System.out.println(ctx.getBean(Petya.class));
+
+        // ДЗ
 
 //        Share orcl = new Share("ORCL", 75);
 //        Share TSLA = new Share("TSLA", 696);

@@ -1,5 +1,6 @@
 package ru.shumilin.spring.postProcessor.toStringPostProcessor;
 
+import lombok.SneakyThrows;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.beans.BeansException;
@@ -23,14 +24,7 @@ public class ToStringBeanPostProcessor implements BeanPostProcessor {
 
             proxyFactory.addAdvice((MethodInterceptor) invocation -> {
                 if(invocation.getMethod().getName().equals("toString")) {
-                    Class<?> beanClazz = bean.getClass();
-                    List<String> fields = new ArrayList<>();
-                    StringBuilder res = new StringBuilder(beanClazz.getSimpleName());
-                    for(Field field : beanClazz.getDeclaredFields()) {
-                        field.setAccessible(true);
-                        fields.add(field.getName() + "=" + field.get(bean));
-                    }
-                    return res.append(fields).toString();
+                    return createStringFromClass(clazz, bean);
                 }else{
                     return invocation.proceed();
                 }
@@ -39,5 +33,16 @@ public class ToStringBeanPostProcessor implements BeanPostProcessor {
         }
 
         return bean;
+    }
+
+    @SneakyThrows
+    private String createStringFromClass(Class<?> clazz, Object bean){
+        List<String> fields = new ArrayList<>();
+        StringBuilder res = new StringBuilder(clazz.getSimpleName());
+        for(Field field : clazz.getDeclaredFields()) {
+            field.setAccessible(true);
+            fields.add(field.getName() + "=" + field.get(bean));
+        }
+        return res.append(fields).toString();
     }
 }

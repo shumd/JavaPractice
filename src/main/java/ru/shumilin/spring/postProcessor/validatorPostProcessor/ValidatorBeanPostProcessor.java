@@ -13,6 +13,7 @@ import java.util.Optional;
 public class ValidatorBeanPostProcessor implements BeanPostProcessor {
     private final ApplicationContext ctx;
 
+    @SuppressWarnings("unchecked")
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
         Class<?> clazz = bean.getClass();
