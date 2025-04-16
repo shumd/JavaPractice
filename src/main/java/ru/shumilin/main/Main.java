@@ -5,6 +5,7 @@ import org.springframework.cglib.proxy.Enhancer;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import ru.shumilin.animals.cats.Meowable;
+import ru.shumilin.spring.jdbc.dao.DataBase;
 import ru.shumilin.spring.postProcessor.cachePostProcessor.Summerable;
 import ru.shumilin.connection.Connection;
 import ru.shumilin.connection.ConnectionLostException;
@@ -1485,13 +1486,6 @@ public class Main {
 
         ApplicationContext ctx = new AnnotationConfigApplicationContext("ru.shumilin.spring");
 
-        for(int i = 0; i < 20; i++){
-            System.out.println(ctx.getBean("random"));
-        }
-
-        System.out.println(ctx.getBean(Petya.class));
-
-        // ДЗ
 
 //        Share orcl = new Share("ORCL", 75);
 //        Share TSLA = new Share("TSLA", 696);
